@@ -43,8 +43,14 @@ namespace UrbanLab.Responses
         public string Active_Ind { get; set; }
         public long? Org_Id { get; set; }
 
-        public List<int> ContactTypeIdList { get; set; }
-        public List<int> ContactProgramRelationIdList { get; set; }
+        public List<IdDescription> ContactTypeIdList { get; set; }
+        public List<IdDescription> ContactProgramRelationIdList { get; set; }
+    }
+
+    public class IdDescription
+    { 
+        public int ID { get; set; }
+        public string Description { get; set; }
     }
 
     public class ContactPersonList : BaseResponse

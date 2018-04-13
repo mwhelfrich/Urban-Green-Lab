@@ -35,20 +35,44 @@ namespace UrbanLab.TableAdapters
                 return null;
         }
 
-        public List<int> GetContactTypeByContactID(long contactID)
+        public List<IdDescription> GetContactTypeByContactID(long contactID)
         {
             UGLEntities DataContext = new UGLEntities();
-            return (from items in DataContext.tblContact_Person_Types
+            var a = (from items in DataContext.tblContact_Person_Types
+                     join l in DataContext.LU_tblContactType on items.Contact_Type_Id equals l.Contact_Type_Id
                     where items.Person_Contact_Id == contactID
-                    select items).Select(x => x.Contact_Type_Id.Value).ToList();
+                    select l).ToList();
+
+            List<IdDescription> id = new List<IdDescription>();
+            foreach(var b in a)
+            {
+                IdDescription i = new IdDescription();
+                i.Description = b.Contact_Type_Desc;
+                i.ID = b.Contact_Type_Id;
+
+                id.Add(i);
+            }
+            return id;
         }
 
-        public List<int> GetContactProgramRelationByContactID(long contactID)
+        public List<IdDescription> GetContactProgramRelationByContactID(long contactID)
         {
             UGLEntities DataContext = new UGLEntities();
-            return (from items in DataContext.tblContact_PgmRelation_Types
-                    where items.Person_Contact_Id == contactID
-                    select items).Select(x => x.PgmRelation_Type_Id).ToList();
+            var a = (from items in DataContext.tblContact_PgmRelation_Types
+                     join l in DataContext.LU_tblPgmRelationType on items.PgmRelation_Type_Id equals l.PgmRelation_Type_Id
+                     where items.Person_Contact_Id == contactID
+                     select l).ToList();
+
+            List<IdDescription> id = new List<IdDescription>();
+            foreach (var b in a)
+            {
+                IdDescription i = new IdDescription();
+                i.Description = b.PgmRelation_Type_Desc;
+                i.ID = b.PgmRelation_Type_Id;
+
+                id.Add(i);
+            }
+            return id;
         }
 
         internal tblContact_Org GetAllOrganizationByID(long OrgID)
@@ -418,7 +442,7 @@ namespace UrbanLab.TableAdapters
             return response;
         }
 
-        internal BaseResponse InsertContactPersonType(long contactID, List<int> contactTypeID)
+        internal BaseResponse InsertContactPersonType(long contactID, List<IdDescription> contactTypeID)
         {
             UGLEntities d = new UGLEntities();
             BaseResponse response = new BaseResponse();
@@ -430,7 +454,7 @@ namespace UrbanLab.TableAdapters
                     {
                         tblContact_Person_Types ev = new tblContact_Person_Types();
                         ev.Person_Contact_Id = contactID;
-                        ev.Contact_Type_Id = a;
+                        ev.Contact_Type_Id = a.ID;
                         ev.Create_Datetime = DateTime.Now;
                         d.tblContact_Person_Types.Add(ev);
                     }
@@ -448,7 +472,7 @@ namespace UrbanLab.TableAdapters
             return response;
         }
 
-        internal BaseResponse InsertContactProgramRelationType(long contactID, List<int> PgrmRelType)
+        internal BaseResponse InsertContactProgramRelationType(long contactID, List<IdDescription> PgrmRelType)
         {
             UGLEntities d = new UGLEntities();
             BaseResponse response = new BaseResponse();
@@ -460,7 +484,7 @@ namespace UrbanLab.TableAdapters
                     {
                         tblContact_PgmRelation_Types ev = new tblContact_PgmRelation_Types();
                         ev.Person_Contact_Id = contactID;
-                        ev.PgmRelation_Type_Id = a;
+                        ev.PgmRelation_Type_Id = a.ID;
                         ev.Create_Datetime = DateTime.Now;
                         d.tblContact_PgmRelation_Types.Add(ev);
                     }
