@@ -101,6 +101,22 @@ namespace UrbanLab.TableAdapters
             return list;
         }
 
+        public string GetEventTypeByEventTypeID(int eventTypeID)
+        {
+            UGLEntities DataContext = new UGLEntities();
+            return (from items in DataContext.LU_tblEventType
+                     where items.Event_Type_Id == eventTypeID
+                     select items).FirstOrDefault().Event_Type_Desc;
+        }
+
+        public string GetStatusByStatusID(int statusID)
+        {
+            UGLEntities DataContext = new UGLEntities();
+            return (from items in DataContext.LU_tblEventStatus
+                    where items.Event_Status_Id == statusID
+                    select items).FirstOrDefault().Event_Status_Desc;
+        }
+
 
         #endregion
 

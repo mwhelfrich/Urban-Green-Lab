@@ -74,8 +74,10 @@ namespace UrbanLab.Responses
     {
         public long Event_Id { get; set; }
         public int Event_Type_Id { get; set; }
+        public string Event_Type_Description { get; set; }
         public string Title { get; set; }
         public int Status { get; set; }
+        public string StatusDescription { get; set; }
         public DateTime Date { get; set; }
         public DateTime Planned_Start { get; set; }
         public DateTime Planned_End { get; set; }

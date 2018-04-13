@@ -171,8 +171,10 @@ namespace UrbanLab.Logic
                 {
                     e.Event_Id = b.Event_Id;
                     e.Event_Type_Id = b.Event_Type_Id.Value;
+                    e.Event_Type_Description = ContactTableAdapter.GetEventTypeByEventTypeID(b.Event_Type_Id.Value);
                     e.Title = b.Title;
                     e.Status = b.Status.Value;
+                    e.StatusDescription = ContactTableAdapter.GetStatusByStatusID(b.Status.Value);
                     e.Date = b.Event_Date.Value;
                     e.Planned_Start = b.Planned_Start.Value;
                     e.Planned_End = b.Planned_End.Value;
