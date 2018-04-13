@@ -151,11 +151,12 @@ namespace UrbanLab.TableAdapters
             UGLEntities d = new UGLEntities();
             if (request != null && request.Contact_Id > 0)
             {
-                var pp = GetContactByContactID(request.Contact_Id);
+                var ppp = GetContactByContactID(request.Contact_Id);
 
                 //Update
-                if (pp != null && (string.IsNullOrWhiteSpace(pp.Active_Ind) || pp.Active_Ind != "N"))
+                if (ppp != null && (string.IsNullOrWhiteSpace(ppp.Active_Ind) || ppp.Active_Ind != "N"))
                 {
+                    var pp = d.tblContact_Person.Where(x => x.Person_Contact_Id == request.Contact_Id).FirstOrDefault();
                     pp.Addr_City = string.IsNullOrWhiteSpace(request.Addr_City)? request.Addr_City: pp.Addr_City;
                     pp.Addr_State = string.IsNullOrWhiteSpace(request.Addr_State)? request.Addr_State: pp.Addr_State;
                     pp.Addr_Street = string.IsNullOrWhiteSpace(request.Addr_Street)? request.Addr_Street:pp.Addr_Street;
@@ -174,8 +175,9 @@ namespace UrbanLab.TableAdapters
                     pp.Job_Title = string.IsNullOrWhiteSpace(request.Job_Title)? request.Job_Title: pp.Job_Title;
                     pp.Active_Ind = "Y";
                 }
-                else if (pp != null && pp.Active_Ind == "N") //Delete
+                else if (ppp != null && ppp.Active_Ind == "N") //Delete
                 {
+                    var pp = d.tblContact_Person.Where(x => x.Person_Contact_Id == request.Contact_Id).FirstOrDefault();
                     pp.Active_Ind = "N";
                 }
             }
@@ -252,10 +254,12 @@ namespace UrbanLab.TableAdapters
             UGLEntities d = new UGLEntities();
             if (request != null && request.Org_Id > 0)
             {
-                var pp = GetAllOrganizationByID(request.Org_Id);
+                var ppp = GetAllOrganizationByID(request.Org_Id);
                 //Update
-                if (pp != null && (string.IsNullOrWhiteSpace(pp.Active_Ind) || pp.Active_Ind != "N"))
+                if (ppp != null && (string.IsNullOrWhiteSpace(ppp.Active_Ind) || ppp.Active_Ind != "N"))
                 {
+                    var pp = d.tblContact_Org.Where(x => x.Org_Id == request.Org_Id).FirstOrDefault();
+
                     pp.Active_Ind = "Y";
                     pp.Addr_City = string.IsNullOrWhiteSpace(request.Addr_City)? request.Addr_City: pp.Addr_City;
                     pp.Addr_State = string.IsNullOrWhiteSpace(request.Addr_State)? request.Addr_State: pp.Addr_State;
@@ -269,8 +273,9 @@ namespace UrbanLab.TableAdapters
                     pp.Phone_Type = string.IsNullOrWhiteSpace(request.Phone_Type)? request.Phone_Type: pp.Phone_Type;
                     pp.Primary_Contact = request.Primary_Contact> 0? request.Primary_Contact: pp.Primary_Contact;
                 }
-                else if (pp != null && pp.Active_Ind == "N") //Delete
+                else if (ppp != null && ppp.Active_Ind == "N") //Delete
                 {
+                    var pp = d.tblContact_Org.Where(x => x.Org_Id == request.Org_Id).FirstOrDefault();
                     pp.Active_Ind = "N";
                 }
             }
@@ -310,11 +315,12 @@ namespace UrbanLab.TableAdapters
             UGLEntities d = new UGLEntities();
             if (request != null && request.Event_Id > 0)
             {
-                var ee = GetAllEventByID(request.Event_Id);
+                var eee = GetAllEventByID(request.Event_Id);
 
                 //Update
-                if (ee != null && (string.IsNullOrWhiteSpace(ee.Active_Ind) || ee.Active_Ind != "N"))
+                if (eee != null && (string.IsNullOrWhiteSpace(eee.Active_Ind) || eee.Active_Ind != "N"))
                 {
+                    var ee = d.tblEvent_Info.Where(x => x.Event_Id == request.Event_Id).FirstOrDefault();
                     ee.Event_Type_Id = request.Event_Type_Id > 0 ? request.Event_Type_Id : ee.Event_Type_Id;
                     ee.Title = !string.IsNullOrWhiteSpace(request.Title) ? request.Title : ee.Title;
                     ee.Status = request.Status > 0 ? request.Status : ee.Status;
@@ -341,9 +347,12 @@ namespace UrbanLab.TableAdapters
                     ee.Photo_Release_Ind = !string.IsNullOrWhiteSpace(request.Photo_Release_Ind) ? request.Photo_Release_Ind : ee.Photo_Release_Ind;
                     ee.Photo_Code = !string.IsNullOrWhiteSpace(request.Photo_Code) ? request.Photo_Code : ee.Photo_Code;
                     ee.Involved_Org_Cnt = request.Involved_Org_Cnt != 0 ? request.Involved_Org_Cnt : ee.Involved_Org_Cnt;
+
                 }
-                else if (ee != null && ee.Active_Ind == "N") //Delete
+                else if (eee != null && eee.Active_Ind == "N") //Delete
                 {
+                    var ee = d.tblEvent_Info.Where(x => x.Event_Id == request.Event_Id).FirstOrDefault();
+
                     ee.Active_Ind = "N";
                 }
             }
