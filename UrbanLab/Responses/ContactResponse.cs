@@ -96,7 +96,8 @@ namespace UrbanLab.Responses
         public string Notes { get; set; }
         public string Photo_Release_Ind { get; set; }
         public string Photo_Code { get; set; }
-        public int Involved_Org_Cnt { get; set; }        
+        public int Involved_Org_Cnt { get; set; }            
+        public List<EventContactRole> EventContactRole { get; set; }
     }
 
     public class LookUpTypeListResponse: BaseResponse
@@ -114,4 +115,16 @@ namespace UrbanLab.Responses
         public bool Success { get; set; }
         public string Message { get; set; }
     }    
+
+    public class EventContactRole
+    {
+        public long ContactID { get; set; }
+        public int EventRoleID { get; set; }
+    }
+
+    public class EventContactRoleList
+    {
+        public long EventID { get; set; }
+        public List<EventContactRole> EventContactRole { get; set; }
+    }
 }

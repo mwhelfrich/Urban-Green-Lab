@@ -55,6 +55,11 @@ namespace UrbanLab.Logic
             return response;
         }
 
+        internal BaseResponse CreateEventContacts(EventContactRoleList request)
+        { 
+            return ContactTableAdapter.InsertEventRoster(request);
+        }
+
         internal ContactPerson GetContactByID(int ContactID)
         {
             ContactPerson c = new ContactPerson();

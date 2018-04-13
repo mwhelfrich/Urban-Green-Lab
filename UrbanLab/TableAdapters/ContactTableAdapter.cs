@@ -145,6 +145,37 @@ namespace UrbanLab.TableAdapters
             return r;
         }
 
+        internal BaseResponse InsertEventRoster(EventContactRoleList request)
+        {
+            UGLEntities d = new UGLEntities();
+            BaseResponse response = new BaseResponse();
+            try
+            {
+                long eveID = request.EventID;
+                if (request.EventContactRole != null && request.EventContactRole.Count() > 0)
+                {
+                    foreach (var a in request.EventContactRole)
+                    {
+                        tblEvent_Roster ev = new tblEvent_Roster();
+                        ev.Event_Id = eveID;
+                        ev.Contact_Id = a.ContactID;
+                        ev.Contact_Event_Role = a.EventRoleID;
+                        d.tblEvent_Roster.Add(ev);
+                    }
+
+                    d.SaveChanges();
+                }
+                response.Success = true;
+                response.Message = "Event contact map update successful.";
+            }
+            catch(Exception e)
+            {
+                response.Success = false;
+                response.Message = "Event contact map update unsuccessful. Error: "+ e.Message;
+            }
+            return response;
+        }
+
         public BaseResponse CreateContactOrganization(ContactOrganization request)
         {
             UGLEntities d = new UGLEntities();
@@ -282,6 +313,20 @@ namespace UrbanLab.TableAdapters
             try
             {
                 d.SaveChanges();
+                if (request.EventContactRole != null && request.EventContactRole.Count() > 0)
+                {
+                    EventContactRoleList list = new EventContactRoleList();
+                    if (request.Event_Id > 0)
+                    {
+                        list.EventID = request.Event_Id;
+                    }
+                    else
+                    {
+                        list.EventID = d.tblEvent_Info.Where(x => x.Title == request.Title).LastOrDefault().Event_Id;
+                    }
+                    list.EventContactRole = request.EventContactRole;
+                    InsertEventRoster(list);
+                }
                 r.Success = true;
                 r.Message = "Successfully created Event.";
             }
