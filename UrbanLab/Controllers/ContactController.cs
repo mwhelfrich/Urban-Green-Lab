@@ -50,7 +50,7 @@ namespace UrbanLab.Controllers
             return cl.CreateOrganization(request);
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("CreateEvent")]
         public BaseResponse CreateEvent(EventInfo request)
         {
