@@ -26,6 +26,14 @@ namespace UrbanLab.Controllers
             return cl.GetContactByID(ContactID);
         }
 
+        [HttpGet]
+        [Route("GetEventByID")]
+        public EventInfo GetEventById(int eventID)
+        {
+            ContactLogic cl = new ContactLogic();
+            return cl.GetEventInfoByID(eventID);
+        }
+
         [HttpPost]
         [Route("CreateContact")]
         public BaseResponse CreateContact(ContactPerson request)
@@ -42,12 +50,29 @@ namespace UrbanLab.Controllers
             return cl.CreateOrganization(request);
         }
 
+        [HttpPost]
+        [Route("CreateEvent")]
+        public BaseResponse CreateEvent(EventInfo request)
+        {
+            ContactLogic cl = new ContactLogic();
+            return cl.CreateEventInfo(request);
+        }
+        
+
         [HttpGet]
         [Route("GetOrganization")]
         public ContactOrganizationList GetOrganizations()
         {
             ContactLogic cl = new ContactLogic();
             return cl.GetOrganizations();
+        }
+
+        [HttpGet]
+        [Route("GetOrganizationById")]
+        public ContactOrganization GetOrganizations(long orgId)
+        {
+            ContactLogic cl = new ContactLogic();
+            return cl.GetOrganizationsByID(orgId);
         }
 
         [HttpGet]
@@ -58,12 +83,6 @@ namespace UrbanLab.Controllers
             return cl.GetEventInfo();
         }
 
-        [HttpPost]
-        [Route("CreateEvent")]
-        public BaseResponse CreateEvent(EventInfo request)
-        {
-            ContactLogic cl = new ContactLogic();
-            return cl.CreateEventInfo(request);
-        }
+
     }
 }

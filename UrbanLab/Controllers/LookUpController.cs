@@ -16,10 +16,42 @@ namespace UrbanLab.Controllers
 
         [HttpGet]
         [Route("GetContactType")]
-        public List<ContactTypeResponse> GetContacts()
+        public LookUpTypeListResponse GetContacts()
         {           
             LookUpLogic ll = new LookUpLogic();
             return ll.GetContactType();
+        }
+
+        [HttpGet]
+        [Route("GetEventRole")]
+        public LookUpTypeListResponse GetEventRole()
+        {
+            LookUpLogic ll = new LookUpLogic();
+            return ll.GetEventRole();
+        }
+
+        [HttpGet]
+        [Route("GetEventStatus")]
+        public LookUpTypeListResponse GetEventStatus()
+        {
+            LookUpLogic ll = new LookUpLogic();
+            return ll.GetEventStatus();
+        }
+
+        [HttpGet]
+        [Route("GetEventType")]
+        public LookUpTypeListResponse GetEventType()
+        {
+            LookUpLogic ll = new LookUpLogic();
+            return ll.GetEventType();
+        }
+
+        [HttpGet]
+        [Route("GetProgramRelation")]
+        public LookUpTypeListResponse GetProgramRelation()
+        {
+            LookUpLogic ll = new LookUpLogic();
+            return ll.GetProgramRelation();
         }
     }
 }

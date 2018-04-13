@@ -20,8 +20,8 @@ namespace UrbanLab
             this.tblContact_Person_Types = new HashSet<tblContact_Person_Types>();
         }
     
-        public int Type_Id { get; set; }
-        public string Type_Desc { get; set; }
+        public int Contact_Type_Id { get; set; }
+        public string Contact_Type_Desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblContact_Person_Types> tblContact_Person_Types { get; set; }

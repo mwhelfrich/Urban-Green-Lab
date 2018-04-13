@@ -12,18 +12,19 @@ namespace UrbanLab
     using System;
     using System.Collections.Generic;
     
-    public partial class tblEvent_Roster
+    public partial class vwEvent_Attendance
     {
+        public Nullable<short> Year_Id { get; set; }
+        public Nullable<short> Month_Num { get; set; }
         public long Event_Roster_Id { get; set; }
         public Nullable<long> Event_Id { get; set; }
+        public Nullable<System.DateTime> Event_Date { get; set; }
+        public Nullable<decimal> Event_Duration { get; set; }
         public Nullable<long> Contact_Id { get; set; }
         public Nullable<decimal> Contact_Hours { get; set; }
         public Nullable<int> Contact_Event_Role { get; set; }
-        public Nullable<System.DateTime> Modified_Datetime { get; set; }
-        public Nullable<System.DateTime> Create_Datetime { get; set; }
-    
-        public virtual LU_tblEvent_Role LU_tblEvent_Role { get; set; }
-        public virtual tblContact_Person tblContact_Person { get; set; }
-        public virtual tblEvent_Info tblEvent_Info { get; set; }
+        public Nullable<int> Event_Type_Id { get; set; }
+        public string Event_Type_Desc { get; set; }
+        public string Event_Role_Desc { get; set; }
     }
 }

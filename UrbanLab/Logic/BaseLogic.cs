@@ -1,4 +1,5 @@
 ﻿
+using System.Web.UI.WebControls;
 using UrbanLab.TableAdapters;
 
 namespace UrbanLab.Logic
@@ -6,7 +7,7 @@ namespace UrbanLab.Logic
     public class BaseLogic
     {
 
-        protected DataAccess.Audit.AuditClient AuditClient { get; set; }
+        protected Unit AuditClient { get; set; }
 
         private TableAdapters.ContactTableAdapter _contactTableAdapterproperty = null;
         protected TableAdapters.ContactTableAdapter ContactTableAdapter

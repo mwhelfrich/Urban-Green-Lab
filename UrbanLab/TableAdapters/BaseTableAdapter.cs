@@ -1,29 +1,15 @@
-﻿using DataAccess.Audit;
-
-namespace UrbanLab.TableAdapters
+﻿namespace UrbanLab.TableAdapters
 {
     public class BaseTableAdapter
     {
-        private AuditClient AuditClient;
-        #region Protected Properties
-      //  protected UrbanLab.misspiggyDBEntities AuditClient { get; set; }
 
-        protected UrbanLab.misspiggyDBEntities DataContext
+        protected UrbanLab.UGLEntities DataContext
         {
             get
             {
-                return AuditClient.DataContext;
+                return DataContext;
             }
-        }
-        #endregion
-
-        #region Constructor
-       
-        public BaseTableAdapter(AuditClient auditClient)
-        {
-            AuditClient = auditClient;
-        }
-        #endregion
+        }        
     }
 }
 

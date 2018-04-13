@@ -51,6 +51,7 @@ namespace UrbanLab
         public virtual DbSet<ProductModelProductDescription> ProductModelProductDescriptions { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
         public virtual DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
+        public virtual DbSet<vwEvent_Attendance> vwEvent_Attendance { get; set; }
         public virtual DbSet<vGetAllCategory> vGetAllCategories { get; set; }
         public virtual DbSet<vProductAndDescription> vProductAndDescriptions { get; set; }
         public virtual DbSet<vProductModelCatalogDescription> vProductModelCatalogDescriptions { get; set; }

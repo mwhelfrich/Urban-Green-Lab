@@ -32,12 +32,10 @@ namespace UrbanLab.Responses
         public string Addr_City { get; set; }
         public string Addr_State { get; set; }
         public string Addr_ZipCode { get; set; }
-        public string Phone_Work { get; set; }
+        public string Phone_Other { get; set; }
         public string Phone_Cell { get; set; }
-        public long Related_Contact_1 { get; set; }
-        public long Related_Contact_2 { get; set; }
         public long Intro_Contact { get; set; }
-        public string Title { get; set; }
+        public string Job_Title { get; set; }
         public string Related_Program { get; set; }
         public string Notes { get; set; }
         public DateTime Create_Datetime { get; set; }
@@ -70,7 +68,7 @@ namespace UrbanLab.Responses
         public List<EventInfo> EventInfo { get; set; }
     }
 
-    public class EventInfo
+    public class EventInfo : BaseResponse
     {
         public long Event_Id { get; set; }
         public int Event_Type_Id { get; set; }
@@ -100,10 +98,15 @@ namespace UrbanLab.Responses
         public string Photo_Code { get; set; }
         public int Involved_Org_Cnt { get; set; }        
     }
-    public class ContactTypeResponse
+
+    public class LookUpTypeListResponse: BaseResponse
     {
-        public string ContactType { get; set; }
-        public int ContactTypeID { get; set; }
+        public List<LookUpTypeResponse> LookUp { get; set; }
+    }
+    public class LookUpTypeResponse
+    {
+        public string TypeDescription { get; set; }
+        public int TypeID { get; set; }
     }
 
     public class BaseResponse

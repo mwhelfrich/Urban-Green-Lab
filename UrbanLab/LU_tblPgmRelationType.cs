@@ -14,8 +14,8 @@ namespace UrbanLab
     
     public partial class LU_tblPgmRelationType
     {
-        public int Type_Id { get; set; }
-        public string Type_Desc { get; set; }
+        public int PgmRelation_Type_Id { get; set; }
+        public string PgmRelation_Type_Desc { get; set; }
     
         public virtual tblContact_PgmRelation_Types tblContact_PgmRelation_Types { get; set; }
     }

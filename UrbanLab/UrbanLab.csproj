@@ -250,7 +250,7 @@
       <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="database_firewall_rules.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ErrorLog.cs">
       <DependentUpon>UBLModel.tt</DependentUpon>
@@ -262,19 +262,19 @@
     <Compile Include="Logic\ContactLogic.cs" />
     <Compile Include="Logic\LookUpLogic.cs" />
     <Compile Include="LU_tblContactType.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LU_tblEventStatus.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LU_tblEventType.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LU_tblEvent_Role.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="LU_tblPgmRelationType.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -306,30 +306,29 @@
       <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="TableAdapters\AuditClient.cs" />
     <Compile Include="TableAdapters\BaseTableAdapter.cs" />
     <Compile Include="TableAdapters\ContactTableAdapter.cs" />
     <Compile Include="TableAdapters\LookUpAdapter.cs" />
     <Compile Include="tblContact_Org.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblContact_Person.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblContact_Person_Types.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblContact_PgmRelation_Types.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblDonation_Info.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEvent_Info.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEvent_Roster.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UBLModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -352,6 +351,21 @@
     <Compile Include="ufnGetCustomerInformation_Result.cs">
       <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UGLModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UGLModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UGLModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UGLModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UGLModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UGLModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="vGetAllCategory.cs">
       <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
@@ -360,6 +374,9 @@
     </Compile>
     <Compile Include="vProductModelCatalogDescription.cs">
       <DependentUpon>UBLModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwEvent_Attendance.cs">
+      <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -416,6 +433,16 @@
       <DependentUpon>UBLModel.edmx</DependentUpon>
       <LastGenOutput>UBLModel.cs</LastGenOutput>
     </Content>
+    <Content Include="UGLModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UGLModel.edmx</DependentUpon>
+      <LastGenOutput>UGLModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UGLModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UGLModel.edmx</DependentUpon>
+      <LastGenOutput>UGLModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -437,6 +464,13 @@
     </EntityDeploy>
     <Content Include="UBLModel.edmx.diagram">
       <DependentUpon>UBLModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="UGLModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UGLModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="UGLModel.edmx.diagram">
+      <DependentUpon>UGLModel.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

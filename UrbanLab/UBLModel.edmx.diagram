@@ -9,13 +9,13 @@
         <EntityTypeShape EntityType="misspiggyDBModel.ErrorLog" Width="1.5" PointX="7.75" PointY="11.75" />
         <EntityTypeShape EntityType="misspiggyDBModel.LU_tblContactType" Width="1.5" PointX="2.75" PointY="15.375" />
         <EntityTypeShape EntityType="misspiggyDBModel.LU_tblEvent_Role" Width="1.5" PointX="3" PointY="12.25" />
-        <EntityTypeShape EntityType="misspiggyDBModel.LU_tblEventStatus" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="misspiggyDBModel.LU_tblEventStatus" Width="1.5" PointX="0.75" PointY="29.625" />
         <EntityTypeShape EntityType="misspiggyDBModel.LU_tblEventType" Width="1.5" PointX="0.75" PointY="6.125" />
         <EntityTypeShape EntityType="misspiggyDBModel.LU_tblPgmRelationType" Width="1.5" PointX="12.75" PointY="3.375" />
-        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Org" Width="1.5" PointX="1.5" PointY="20.375" />
-        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Person" Width="1.5" PointX="0.75" PointY="12.125" />
-        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Person_Types" Width="1.5" PointX="5" PointY="15.375" />
-        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_PgmRelation_Types" Width="1.5" PointX="18" PointY="8" />
+        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Org" Width="1.5" PointX="1.5" PointY="23.875" />
+        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Person" Width="1.5" PointX="0.75" PointY="15.375" />
+        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_Person_Types" Width="1.5" PointX="5" PointY="17.875" />
+        <EntityTypeShape EntityType="misspiggyDBModel.tblContact_PgmRelation_Types" Width="1.5" PointX="16" PointY="11" />
         <EntityTypeShape EntityType="misspiggyDBModel.tblDonation_Info" Width="1.5" PointX="7.75" PointY="15.75" />
         <EntityTypeShape EntityType="misspiggyDBModel.tblEvent_Info" Width="1.5" PointX="3" PointY="3.25" />
         <EntityTypeShape EntityType="misspiggyDBModel.tblEvent_Roster" Width="1.5" PointX="5.25" PointY="5.5" />
@@ -23,16 +23,17 @@
         <EntityTypeShape EntityType="misspiggyDBModel.Customer" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="misspiggyDBModel.CustomerAddress" Width="1.5" PointX="13" PointY="6.75" />
         <EntityTypeShape EntityType="misspiggyDBModel.Product" Width="1.5" PointX="13" PointY="12.5" />
-        <EntityTypeShape EntityType="misspiggyDBModel.ProductCategory" Width="1.5" PointX="10.75" PointY="15.125" />
-        <EntityTypeShape EntityType="misspiggyDBModel.ProductDescription" Width="1.5" PointX="13.75" PointY="18.25" />
-        <EntityTypeShape EntityType="misspiggyDBModel.ProductModel" Width="1.5" PointX="10.75" PointY="12" />
-        <EntityTypeShape EntityType="misspiggyDBModel.ProductModelProductDescription" Width="1.5" PointX="16" PointY="12" />
+        <EntityTypeShape EntityType="misspiggyDBModel.ProductCategory" Width="1.5" PointX="10.75" PointY="12" />
+        <EntityTypeShape EntityType="misspiggyDBModel.ProductDescription" Width="1.5" PointX="10.75" PointY="18.5" />
+        <EntityTypeShape EntityType="misspiggyDBModel.ProductModel" Width="1.5" PointX="10.75" PointY="15.375" />
+        <EntityTypeShape EntityType="misspiggyDBModel.ProductModelProductDescription" Width="1.5" PointX="13" PointY="18.375" />
         <EntityTypeShape EntityType="misspiggyDBModel.SalesOrderDetail" Width="1.5" PointX="15.25" PointY="6.375" />
         <EntityTypeShape EntityType="misspiggyDBModel.SalesOrderHeader" Width="1.5" PointX="10" PointY="4.875" />
-        <EntityTypeShape EntityType="misspiggyDBModel.vGetAllCategory" Width="1.5" PointX="14.75" PointY="2.75" />
-        <EntityTypeShape EntityType="misspiggyDBModel.vProductAndDescription" Width="1.5" PointX="15.75" PointY="15.75" />
-        <EntityTypeShape EntityType="misspiggyDBModel.vProductModelCatalogDescription" Width="1.5" PointX="3.75" PointY="18.75" />
-        <EntityTypeShape EntityType="misspiggyDBModel.database_firewall_rules" Width="1.5" PointX="16.75" PointY="2.75" />
+        <EntityTypeShape EntityType="misspiggyDBModel.vwEvent_Attendance" Width="1.5" PointX="15.75" PointY="14.75" />
+        <EntityTypeShape EntityType="misspiggyDBModel.vGetAllCategory" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="misspiggyDBModel.vProductAndDescription" Width="1.5" PointX="14.75" PointY="2.75" />
+        <EntityTypeShape EntityType="misspiggyDBModel.vProductModelCatalogDescription" Width="1.5" PointX="17.75" PointY="2.75" />
+        <EntityTypeShape EntityType="misspiggyDBModel.database_firewall_rules" Width="1.5" PointX="17.75" PointY="14.75" />
         <AssociationConnector Association="misspiggyDBModel.FK__tblContac__Conta__719CDDE7" />
         <AssociationConnector Association="misspiggyDBModel.FK__tblEvent___Conta__02C769E9" />
         <AssociationConnector Association="misspiggyDBModel.FK__tblEvent___Statu__2E1BDC42" />

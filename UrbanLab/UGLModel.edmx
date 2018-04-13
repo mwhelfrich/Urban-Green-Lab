@@ -1,0 +1,1191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'UGL-Greenhouse.dbo.LU_Date' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LU_Date">
+          <Property Name="Date_Id" Type="date" />
+          <Property Name="Week_Id" Type="int" />
+          <Property Name="Week_Num" Type="smallint" />
+          <Property Name="Week_End_Date" Type="int" />
+          <Property Name="Month_Id" Type="int" />
+          <Property Name="Month_Id_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Id_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Num" Type="smallint" />
+          <Property Name="Month_Num_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Num_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Id" Type="int" />
+          <Property Name="Qtr_Desc" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Num" Type="smallint" />
+          <Property Name="Qtr_Num_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Num_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Semi_Annual_Id" Type="int" />
+          <Property Name="Semi_Annual_Desc" Type="varchar" MaxLength="20" />
+          <Property Name="Year_Id" Type="smallint" />
+          <Property Name="Day_Of_Week" Type="smallint" />
+          <Property Name="Dow_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Dow_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Day_Of_Month" Type="smallint" />
+          <Property Name="Day_Of_Qtr" Type="smallint" />
+          <Property Name="Day_Of_Year" Type="smallint" />
+          <Property Name="Days_In_Week" Type="smallint" />
+          <Property Name="Days_In_Month" Type="smallint" />
+          <Property Name="Days_In_Qtr" Type="smallint" />
+          <Property Name="Days_In_Year" Type="smallint" />
+          <Property Name="Month_Days_Left" Type="smallint" />
+          <Property Name="Week_Days_Left" Type="smallint" />
+          <Property Name="Qtr_Days_Left" Type="smallint" />
+          <Property Name="Year_Days_Left" Type="smallint" />
+          <Property Name="Week_Day_Flag" Type="smallint" />
+          <Property Name="Week_End_Flag" Type="smallint" />
+          <Property Name="Federal_Bank_Holiday_Flag" Type="char" MaxLength="1" />
+          <Property Name="Hca_Holiday_Flag" Type="char" MaxLength="1" />
+          <Property Name="Pe_Date" Type="date" />
+          <Property Name="Pe_Date_Prior_Month" Type="date" />
+          <Property Name="Week_Of_Month" Type="smallint" />
+          <Property Name="Bank_Day_Flag" Type="smallint" />
+          <Property Name="Qtr_Desc_DSS" Type="char" MaxLength="6" />
+          <Property Name="DW_Last_Update_Date_Time" Type="datetime" />
+          <Property Name="Source_System_Code" Type="char" MaxLength="1" />
+        </EntityType>-->
+        <EntityType Name="LU_tblContactType">
+          <Key>
+            <PropertyRef Name="Contact_Type_Id" />
+          </Key>
+          <Property Name="Contact_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Contact_Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tblEvent_Role">
+          <Key>
+            <PropertyRef Name="Event_Role_Id" />
+          </Key>
+          <Property Name="Event_Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_Role_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tblEventStatus">
+          <Key>
+            <PropertyRef Name="Event_Status_Id" />
+          </Key>
+          <Property Name="Event_Status_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_Status_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tblEventType">
+          <Key>
+            <PropertyRef Name="Event_Type_Id" />
+          </Key>
+          <Property Name="Event_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tblPgmRelationType">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PgmRelation_Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContact_Org">
+          <Key>
+            <PropertyRef Name="Org_Id" />
+          </Key>
+          <Property Name="Org_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Org_Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email_Id" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Primary_Contact" Type="bigint" />
+          <Property Name="Addr_Street" Type="varchar" MaxLength="100" />
+          <Property Name="Addr_City" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_State" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_ZipCode" Type="varchar" MaxLength="20" />
+          <Property Name="Phone_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Phone_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Active_Ind" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Kindful_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="SalesForce_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_Country" Type="varchar" MaxLength="100" />
+          <Property Name="Modified_Datetime" Type="datetime2" Precision="7" />
+          <Property Name="Create_Datetime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="tblContact_Person">
+          <Key>
+            <PropertyRef Name="Person_Contact_Id" />
+          </Key>
+          <Property Name="Person_Contact_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_Prefix" Type="varchar" MaxLength="10" />
+          <Property Name="Primary_Email_Id" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Addr_Street" Type="varchar" MaxLength="100" />
+          <Property Name="Addr_City" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_State" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_ZipCode" Type="varchar" MaxLength="20" />
+          <Property Name="Phone_Other" Type="varchar" MaxLength="20" />
+          <Property Name="Phone_Cell" Type="varchar" MaxLength="20" />
+          <Property Name="Intro_Contact" Type="bigint" />
+          <Property Name="Job_Title" Type="varchar" MaxLength="50" />
+          <Property Name="Notes" Type="varchar" MaxLength="255" />
+          <Property Name="Active_Ind" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Org_Id" Type="bigint" />
+          <Property Name="Kindful_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="SalesForce_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_Country" Type="varchar" MaxLength="100" />
+          <Property Name="Secondary_Email_Id" Type="varchar" MaxLength="80" />
+          <Property Name="Volunteer_Interest_Ind" Type="char" MaxLength="1" />
+          <Property Name="Address_Line_1" Type="varchar" MaxLength="100" />
+          <Property Name="Address_Line_2" Type="varchar" MaxLength="100" />
+          <Property Name="Address_Line_3" Type="varchar" MaxLength="100" />
+          <Property Name="Introduced_By" Type="varchar" MaxLength="100" />
+          <Property Name="Create_Datetime" Type="datetime2" Precision="7" />
+          <Property Name="Modified_Datetime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="tblContact_Person_Types">
+          <Key>
+            <PropertyRef Name="Person_Type_Id" />
+          </Key>
+          <Property Name="Person_Type_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Person_Contact_Id" Type="bigint" />
+          <Property Name="Contact_Type_Id" Type="int" />
+          <Property Name="Create_Datetime" Type="datetime" />
+          <Property Name="Modified_Datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblContact_PgmRelation_Types">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PgmRelation_Contact_Id" Type="bigint" />
+          <Property Name="PgmRelation_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Create_Datetime" Type="datetime" />
+          <Property Name="Modified_Datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblDonation_Info">
+          <Key>
+            <PropertyRef Name="Donation_Id" />
+          </Key>
+          <Property Name="Donation_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Donor_First_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Donor_Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Donor_Contact_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Is_Donor_Org_Ind" Type="char" MaxLength="1" />
+          <Property Name="Is_Org_Gift" Type="char" MaxLength="1" />
+          <Property Name="Donor_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Donor_Email_Id" Type="varchar" MaxLength="80" />
+          <Property Name="Donor_Employer" Type="varchar" MaxLength="80" />
+          <Property Name="Campaign_Name" Type="varchar" MaxLength="255" />
+          <Property Name="Tran_Amt" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Tran_Date" Type="date" />
+          <Property Name="Tran_Check_Num" Type="varchar" MaxLength="20" />
+          <Property Name="Tran_Card_Last4" Type="char" MaxLength="4" />
+          <Property Name="Load_Datetime" Type="datetime" />
+          <Property Name="Modified_Datetime" Type="datetime" />
+          <Property Name="Donor_Contact_Id" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tblEvent_Info">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+          </Key>
+          <Property Name="Event_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_Type_Id" Type="int" />
+          <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Event_Date" Type="date" />
+          <Property Name="Planned_Start" Type="datetime2" Precision="7" />
+          <Property Name="Planned_End" Type="datetime2" Precision="7" />
+          <Property Name="Event_Duration" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Location_Name" Type="varchar" MaxLength="255" />
+          <Property Name="GPS_Location" Type="varchar" MaxLength="255" />
+          <Property Name="Primary_Contact" Type="bigint" />
+          <Property Name="Addr_Street" Type="varchar" MaxLength="100" />
+          <Property Name="Addr_City" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_State" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_ZipCode" Type="varchar" MaxLength="20" />
+          <Property Name="Active_Ind" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Adult_Cnt" Type="bigint" />
+          <Property Name="Child_Cnt" Type="bigint" />
+          <Property Name="Mileage" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="Average_Score" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Revenue" Type="decimal" Precision="15" Scale="3" />
+          <Property Name="Notes" Type="varchar" MaxLength="1000" />
+          <Property Name="Photo_Release_Ind" Type="char" MaxLength="1" />
+          <Property Name="Photo_Code" Type="varchar" MaxLength="255" />
+          <Property Name="Involved_Org_Cnt" Type="int" />
+          <Property Name="Modified_Datetime" Type="datetime2" Precision="7" />
+          <Property Name="Create_Datetime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="tblEvent_Roster">
+          <Key>
+            <PropertyRef Name="Event_Roster_Id" />
+          </Key>
+          <Property Name="Event_Roster_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Event_Id" Type="bigint" />
+          <Property Name="Contact_Id" Type="bigint" />
+          <Property Name="Contact_Hours" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Event_Role" Type="int" />
+          <Property Name="Modified_Datetime" Type="datetime2" Precision="7" />
+          <Property Name="Create_Datetime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGL-Greenhouse.dbo.vwEvent_Attendance' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwEvent_Attendance">
+          <Key>
+            <PropertyRef Name="Event_Roster_Id" />
+            <PropertyRef Name="Event_Type_Desc" />
+            <PropertyRef Name="Event_Role_Desc" />
+          </Key>
+          <Property Name="Year_Id" Type="smallint" />
+          <Property Name="Month_Num" Type="smallint" />
+          <Property Name="Event_Roster_Id" Type="bigint" Nullable="false" />
+          <Property Name="Event_Id" Type="bigint" />
+          <Property Name="Event_Date" Type="date" />
+          <Property Name="Event_Duration" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Id" Type="bigint" />
+          <Property Name="Contact_Hours" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Event_Role" Type="int" />
+          <Property Name="Event_Type_Id" Type="int" />
+          <Property Name="Event_Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Event_Role_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblContac__Conta__6FE99F9F">
+          <End Role="LU_tblContactType" Type="Self.LU_tblContactType" Multiplicity="0..1" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblContactType">
+              <PropertyRef Name="Contact_Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Contact_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Org_I__6EF57B66">
+          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="0..1" />
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Org">
+              <PropertyRef Name="Org_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person">
+              <PropertyRef Name="Org_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Perso__70DDC3D8">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__71D1E811">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__72C60C4A">
+          <End Role="LU_tblPgmRelationType" Type="Self.LU_tblPgmRelationType" Multiplicity="1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblPgmRelationType">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Conta__76969D2E">
+          <End Role="LU_tblEvent_Role" Type="Self.LU_tblEvent_Role" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEvent_Role">
+              <PropertyRef Name="Event_Role_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Event_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Conta__778AC167">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Event__73BA3083">
+          <End Role="LU_tblEventType" Type="Self.LU_tblEventType" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEventType">
+              <PropertyRef Name="Event_Type_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Event_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Event__787EE5A0">
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEvent_Info">
+              <PropertyRef Name="Event_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Event_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Prima__74AE54BC">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Primary_Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Statu__75A278F5">
+          <End Role="LU_tblEventStatus" Type="Self.LU_tblEventStatus" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEventStatus">
+              <PropertyRef Name="Event_Status_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Person">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Org">
+              <PropertyRef Name="Primary_Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="LU_tblContactType" EntityType="Self.LU_tblContactType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblEvent_Role" EntityType="Self.LU_tblEvent_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblEventStatus" EntityType="Self.LU_tblEventStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblEventType" EntityType="Self.LU_tblEventType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_Org" EntityType="Self.tblContact_Org" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_Person" EntityType="Self.tblContact_Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_Person_Types" EntityType="Self.tblContact_Person_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="Self.tblContact_PgmRelation_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblDonation_Info" EntityType="Self.tblDonation_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEvent_Info" EntityType="Self.tblEvent_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEvent_Roster" EntityType="Self.tblEvent_Roster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwEvent_Attendance" EntityType="Self.vwEvent_Attendance" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwEvent_Attendance].[Year_Id] AS [Year_Id], 
+    [vwEvent_Attendance].[Month_Num] AS [Month_Num], 
+    [vwEvent_Attendance].[Event_Roster_Id] AS [Event_Roster_Id], 
+    [vwEvent_Attendance].[Event_Id] AS [Event_Id], 
+    [vwEvent_Attendance].[Event_Date] AS [Event_Date], 
+    [vwEvent_Attendance].[Event_Duration] AS [Event_Duration], 
+    [vwEvent_Attendance].[Contact_Id] AS [Contact_Id], 
+    [vwEvent_Attendance].[Contact_Hours] AS [Contact_Hours], 
+    [vwEvent_Attendance].[Contact_Event_Role] AS [Contact_Event_Role], 
+    [vwEvent_Attendance].[Event_Type_Id] AS [Event_Type_Id], 
+    [vwEvent_Attendance].[Event_Type_Desc] AS [Event_Type_Desc], 
+    [vwEvent_Attendance].[Event_Role_Desc] AS [Event_Role_Desc]
+    FROM [dbo].[vwEvent_Attendance] AS [vwEvent_Attendance]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblContac__Conta__6FE99F9F" Association="Self.FK__tblContac__Conta__6FE99F9F">
+            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Org_I__6EF57B66" Association="Self.FK__tblContac__Org_I__6EF57B66">
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__70DDC3D8" Association="Self.FK__tblContac__Perso__70DDC3D8">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__71D1E811" Association="Self.FK__tblContac__PgmRe__71D1E811">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__72C60C4A" Association="Self.FK__tblContac__PgmRe__72C60C4A">
+            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__76969D2E" Association="Self.FK__tblEvent___Conta__76969D2E">
+            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__778AC167" Association="Self.FK__tblEvent___Conta__778AC167">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__73BA3083" Association="Self.FK__tblEvent___Event__73BA3083">
+            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__787EE5A0" Association="Self.FK__tblEvent___Event__787EE5A0">
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Prima__74AE54BC" Association="Self.FK__tblEvent___Prima__74AE54BC">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Statu__75A278F5" Association="Self.FK__tblEvent___Statu__75A278F5">
+            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Person" Association="Self.FK_Contact_Person">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LU_tblContactType">
+          <Key>
+            <PropertyRef Name="Contact_Type_Id" />
+          </Key>
+          <Property Name="Contact_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Contact_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="Self.FK__tblContac__Conta__6FE99F9F" FromRole="LU_tblContactType" ToRole="tblContact_Person_Types" />
+        </EntityType>
+        <EntityType Name="LU_tblEvent_Role">
+          <Key>
+            <PropertyRef Name="Event_Role_Id" />
+          </Key>
+          <Property Name="Event_Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Role_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Conta__76969D2E" FromRole="LU_tblEvent_Role" ToRole="tblEvent_Roster" />
+        </EntityType>
+        <EntityType Name="LU_tblEventStatus">
+          <Key>
+            <PropertyRef Name="Event_Status_Id" />
+          </Key>
+          <Property Name="Event_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Status_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Statu__75A278F5" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="LU_tblEventType">
+          <Key>
+            <PropertyRef Name="Event_Type_Id" />
+          </Key>
+          <Property Name="Event_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__73BA3083" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="LU_tblPgmRelationType">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PgmRelation_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Self.FK__tblContac__PgmRe__72C60C4A" FromRole="LU_tblPgmRelationType" ToRole="tblContact_PgmRelation_Types" />
+        </EntityType>
+        <EntityType Name="tblContact_Org">
+          <Key>
+            <PropertyRef Name="Org_Id" />
+          </Key>
+          <Property Name="Org_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Org_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Primary_Contact" Type="Int64" />
+          <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblContact_Person1" Relationship="Self.FK_Contact_Person" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+        </EntityType>
+        <EntityType Name="tblContact_Person">
+          <Key>
+            <PropertyRef Name="Person_Contact_Id" />
+          </Key>
+          <Property Name="Person_Contact_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name_Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Primary_Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Other" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Cell" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Intro_Contact" Type="Int64" />
+          <Property Name="Job_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Org_Id" Type="Int64" />
+          <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Secondary_Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Volunteer_Interest_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Address_Line_1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Line_2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Line_3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Introduced_By" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="tblContact_Org" Relationship="Self.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Org1" Relationship="Self.FK_Contact_Person" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="Self.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person" ToRole="tblContact_Person_Types" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Self.FK__tblContac__PgmRe__71D1E811" FromRole="tblContact_Person" ToRole="tblContact_PgmRelation_Types" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Conta__778AC167" FromRole="tblContact_Person" ToRole="tblEvent_Roster" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Prima__74AE54BC" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="tblContact_Person_Types">
+          <Key>
+            <PropertyRef Name="Person_Type_Id" />
+          </Key>
+          <Property Name="Person_Type_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Person_Contact_Id" Type="Int64" />
+          <Property Name="Contact_Type_Id" Type="Int32" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LU_tblContactType" Relationship="Self.FK__tblContac__Conta__6FE99F9F" FromRole="tblContact_Person_Types" ToRole="LU_tblContactType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person_Types" ToRole="tblContact_Person" />
+        </EntityType>
+        <EntityType Name="tblContact_PgmRelation_Types">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PgmRelation_Contact_Id" Type="Int64" />
+          <Property Name="PgmRelation_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LU_tblPgmRelationType" Relationship="Self.FK__tblContac__PgmRe__72C60C4A" FromRole="tblContact_PgmRelation_Types" ToRole="LU_tblPgmRelationType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__PgmRe__71D1E811" FromRole="tblContact_PgmRelation_Types" ToRole="tblContact_Person" />
+        </EntityType>
+        <EntityType Name="tblDonation_Info">
+          <Key>
+            <PropertyRef Name="Donation_Id" />
+          </Key>
+          <Property Name="Donation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Donor_First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Donor_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Donor_Contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Is_Donor_Org_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Is_Org_Gift" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Donor_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Donor_Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Donor_Employer" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Campaign_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Tran_Amt" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Tran_Date" Type="DateTime" Precision="0" />
+          <Property Name="Tran_Check_Num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tran_Card_Last4" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Load_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Donor_Contact_Id" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tblEvent_Info">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+          </Key>
+          <Property Name="Event_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Type_Id" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Event_Date" Type="DateTime" Precision="0" />
+          <Property Name="Planned_Start" Type="DateTime" Precision="7" />
+          <Property Name="Planned_End" Type="DateTime" Precision="7" />
+          <Property Name="Event_Duration" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Location_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GPS_Location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Primary_Contact" Type="Int64" />
+          <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Adult_Cnt" Type="Int64" />
+          <Property Name="Child_Cnt" Type="Int64" />
+          <Property Name="Mileage" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="Average_Score" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Revenue" Type="Decimal" Precision="15" Scale="3" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Photo_Release_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Photo_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Involved_Org_Cnt" Type="Int32" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="LU_tblEventStatus" Relationship="Self.FK__tblEvent___Statu__75A278F5" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
+          <NavigationProperty Name="LU_tblEventType" Relationship="Self.FK__tblEvent___Event__73BA3083" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Prima__74AE54BC" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Info" ToRole="tblEvent_Roster" />
+        </EntityType>
+        <EntityType Name="tblEvent_Roster">
+          <Key>
+            <PropertyRef Name="Event_Roster_Id" />
+          </Key>
+          <Property Name="Event_Roster_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Event_Id" Type="Int64" />
+          <Property Name="Contact_Id" Type="Int64" />
+          <Property Name="Contact_Hours" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Event_Role" Type="Int32" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="LU_tblEvent_Role" Relationship="Self.FK__tblEvent___Conta__76969D2E" FromRole="tblEvent_Roster" ToRole="LU_tblEvent_Role" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Conta__778AC167" FromRole="tblEvent_Roster" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Roster" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="vwEvent_Attendance">
+          <Key>
+            <PropertyRef Name="Event_Roster_Id" />
+            <PropertyRef Name="Event_Type_Desc" />
+            <PropertyRef Name="Event_Role_Desc" />
+          </Key>
+          <Property Name="Year_Id" Type="Int16" />
+          <Property Name="Month_Num" Type="Int16" />
+          <Property Name="Event_Roster_Id" Type="Int64" Nullable="false" />
+          <Property Name="Event_Id" Type="Int64" />
+          <Property Name="Event_Date" Type="DateTime" Precision="0" />
+          <Property Name="Event_Duration" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Id" Type="Int64" />
+          <Property Name="Contact_Hours" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Contact_Event_Role" Type="Int32" />
+          <Property Name="Event_Type_Id" Type="Int32" />
+          <Property Name="Event_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Event_Role_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK__tblContac__Conta__6FE99F9F">
+          <End Role="LU_tblContactType" Type="Self.LU_tblContactType" Multiplicity="0..1" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblContactType">
+              <PropertyRef Name="Contact_Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Contact_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Conta__76969D2E">
+          <End Role="LU_tblEvent_Role" Type="Self.LU_tblEvent_Role" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEvent_Role">
+              <PropertyRef Name="Event_Role_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Event_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Statu__75A278F5">
+          <End Role="LU_tblEventStatus" Type="Self.LU_tblEventStatus" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEventStatus">
+              <PropertyRef Name="Event_Status_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Event__73BA3083">
+          <End Role="LU_tblEventType" Type="Self.LU_tblEventType" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEventType">
+              <PropertyRef Name="Event_Type_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Event_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__72C60C4A">
+          <End Role="LU_tblPgmRelationType" Type="Self.LU_tblPgmRelationType" Multiplicity="1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblPgmRelationType">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Org_I__6EF57B66">
+          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="0..1" />
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Org">
+              <PropertyRef Name="Org_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person">
+              <PropertyRef Name="Org_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Person">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Org">
+              <PropertyRef Name="Primary_Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Perso__70DDC3D8">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__71D1E811">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Conta__778AC167">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Prima__74AE54BC">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Info">
+              <PropertyRef Name="Primary_Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Event__787EE5A0">
+          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEvent_Info">
+              <PropertyRef Name="Event_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Event_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UGLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LU_tblContactType" EntityType="Self.LU_tblContactType" />
+          <EntitySet Name="LU_tblEvent_Role" EntityType="Self.LU_tblEvent_Role" />
+          <EntitySet Name="LU_tblEventStatus" EntityType="Self.LU_tblEventStatus" />
+          <EntitySet Name="LU_tblEventType" EntityType="Self.LU_tblEventType" />
+          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" />
+          <EntitySet Name="tblContact_Org" EntityType="Self.tblContact_Org" />
+          <EntitySet Name="tblContact_Person" EntityType="Self.tblContact_Person" />
+          <EntitySet Name="tblContact_Person_Types" EntityType="Self.tblContact_Person_Types" />
+          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="Self.tblContact_PgmRelation_Types" />
+          <EntitySet Name="tblDonation_Info" EntityType="Self.tblDonation_Info" />
+          <EntitySet Name="tblEvent_Info" EntityType="Self.tblEvent_Info" />
+          <EntitySet Name="tblEvent_Roster" EntityType="Self.tblEvent_Roster" />
+          <EntitySet Name="vwEvent_Attendance" EntityType="Self.vwEvent_Attendance" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+          <AssociationSet Name="FK__tblContac__Conta__6FE99F9F" Association="Self.FK__tblContac__Conta__6FE99F9F">
+            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__76969D2E" Association="Self.FK__tblEvent___Conta__76969D2E">
+            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Statu__75A278F5" Association="Self.FK__tblEvent___Statu__75A278F5">
+            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__73BA3083" Association="Self.FK__tblEvent___Event__73BA3083">
+            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__72C60C4A" Association="Self.FK__tblContac__PgmRe__72C60C4A">
+            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Org_I__6EF57B66" Association="Self.FK__tblContac__Org_I__6EF57B66">
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Person" Association="Self.FK_Contact_Person">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__70DDC3D8" Association="Self.FK__tblContac__Perso__70DDC3D8">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__71D1E811" Association="Self.FK__tblContac__PgmRe__71D1E811">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__778AC167" Association="Self.FK__tblEvent___Conta__778AC167">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Prima__74AE54BC" Association="Self.FK__tblEvent___Prima__74AE54BC">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__787EE5A0" Association="Self.FK__tblEvent___Event__787EE5A0">
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="UGLEntities">
+          <EntitySetMapping Name="LU_tblContactType">
+            <EntityTypeMapping TypeName="Model.LU_tblContactType">
+              <MappingFragment StoreEntitySet="LU_tblContactType">
+                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
+                <ScalarProperty Name="Contact_Type_Desc" ColumnName="Contact_Type_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEvent_Role">
+            <EntityTypeMapping TypeName="Model.LU_tblEvent_Role">
+              <MappingFragment StoreEntitySet="LU_tblEvent_Role">
+                <ScalarProperty Name="Event_Role_Id" ColumnName="Event_Role_Id" />
+                <ScalarProperty Name="Event_Role_Desc" ColumnName="Event_Role_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEventStatus">
+            <EntityTypeMapping TypeName="Model.LU_tblEventStatus">
+              <MappingFragment StoreEntitySet="LU_tblEventStatus">
+                <ScalarProperty Name="Event_Status_Id" ColumnName="Event_Status_Id" />
+                <ScalarProperty Name="Event_Status_Desc" ColumnName="Event_Status_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEventType">
+            <EntityTypeMapping TypeName="Model.LU_tblEventType">
+              <MappingFragment StoreEntitySet="LU_tblEventType">
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Event_Type_Desc" ColumnName="Event_Type_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblPgmRelationType">
+            <EntityTypeMapping TypeName="Model.LU_tblPgmRelationType">
+              <MappingFragment StoreEntitySet="LU_tblPgmRelationType">
+                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
+                <ScalarProperty Name="PgmRelation_Type_Desc" ColumnName="PgmRelation_Type_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Org">
+            <EntityTypeMapping TypeName="Model.tblContact_Org">
+              <MappingFragment StoreEntitySet="tblContact_Org">
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
+                <ScalarProperty Name="Org_Name" ColumnName="Org_Name" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Phone_Type" ColumnName="Phone_Type" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Person">
+            <EntityTypeMapping TypeName="Model.tblContact_Person">
+              <MappingFragment StoreEntitySet="tblContact_Person">
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Name_Prefix" ColumnName="Name_Prefix" />
+                <ScalarProperty Name="Primary_Email_Id" ColumnName="Primary_Email_Id" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Phone_Other" ColumnName="Phone_Other" />
+                <ScalarProperty Name="Phone_Cell" ColumnName="Phone_Cell" />
+                <ScalarProperty Name="Intro_Contact" ColumnName="Intro_Contact" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="Secondary_Email_Id" ColumnName="Secondary_Email_Id" />
+                <ScalarProperty Name="Volunteer_Interest_Ind" ColumnName="Volunteer_Interest_Ind" />
+                <ScalarProperty Name="Address_Line_1" ColumnName="Address_Line_1" />
+                <ScalarProperty Name="Address_Line_2" ColumnName="Address_Line_2" />
+                <ScalarProperty Name="Address_Line_3" ColumnName="Address_Line_3" />
+                <ScalarProperty Name="Introduced_By" ColumnName="Introduced_By" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Person_Types">
+            <EntityTypeMapping TypeName="Model.tblContact_Person_Types">
+              <MappingFragment StoreEntitySet="tblContact_Person_Types">
+                <ScalarProperty Name="Person_Type_Id" ColumnName="Person_Type_Id" />
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
+                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_PgmRelation_Types">
+            <EntityTypeMapping TypeName="Model.tblContact_PgmRelation_Types">
+              <MappingFragment StoreEntitySet="tblContact_PgmRelation_Types">
+                <ScalarProperty Name="PgmRelation_Id" ColumnName="PgmRelation_Id" />
+                <ScalarProperty Name="PgmRelation_Contact_Id" ColumnName="PgmRelation_Contact_Id" />
+                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDonation_Info">
+            <EntityTypeMapping TypeName="Model.tblDonation_Info">
+              <MappingFragment StoreEntitySet="tblDonation_Info">
+                <ScalarProperty Name="Donation_Id" ColumnName="Donation_Id" />
+                <ScalarProperty Name="Donor_First_Name" ColumnName="Donor_First_Name" />
+                <ScalarProperty Name="Donor_Last_Name" ColumnName="Donor_Last_Name" />
+                <ScalarProperty Name="Donor_Contact_Type" ColumnName="Donor_Contact_Type" />
+                <ScalarProperty Name="Is_Donor_Org_Ind" ColumnName="Is_Donor_Org_Ind" />
+                <ScalarProperty Name="Is_Org_Gift" ColumnName="Is_Org_Gift" />
+                <ScalarProperty Name="Donor_Type" ColumnName="Donor_Type" />
+                <ScalarProperty Name="Donor_Email_Id" ColumnName="Donor_Email_Id" />
+                <ScalarProperty Name="Donor_Employer" ColumnName="Donor_Employer" />
+                <ScalarProperty Name="Campaign_Name" ColumnName="Campaign_Name" />
+                <ScalarProperty Name="Tran_Amt" ColumnName="Tran_Amt" />
+                <ScalarProperty Name="Tran_Date" ColumnName="Tran_Date" />
+                <ScalarProperty Name="Tran_Check_Num" ColumnName="Tran_Check_Num" />
+                <ScalarProperty Name="Tran_Card_Last4" ColumnName="Tran_Card_Last4" />
+                <ScalarProperty Name="Load_Datetime" ColumnName="Load_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Donor_Contact_Id" ColumnName="Donor_Contact_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEvent_Info">
+            <EntityTypeMapping TypeName="Model.tblEvent_Info">
+              <MappingFragment StoreEntitySet="tblEvent_Info">
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Planned_Start" ColumnName="Planned_Start" />
+                <ScalarProperty Name="Planned_End" ColumnName="Planned_End" />
+                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="GPS_Location" ColumnName="GPS_Location" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Adult_Cnt" ColumnName="Adult_Cnt" />
+                <ScalarProperty Name="Child_Cnt" ColumnName="Child_Cnt" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Average_Score" ColumnName="Average_Score" />
+                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Photo_Release_Ind" ColumnName="Photo_Release_Ind" />
+                <ScalarProperty Name="Photo_Code" ColumnName="Photo_Code" />
+                <ScalarProperty Name="Involved_Org_Cnt" ColumnName="Involved_Org_Cnt" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEvent_Roster">
+            <EntityTypeMapping TypeName="Model.tblEvent_Roster">
+              <MappingFragment StoreEntitySet="tblEvent_Roster">
+                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwEvent_Attendance">
+            <EntityTypeMapping TypeName="Model.vwEvent_Attendance">
+              <MappingFragment StoreEntitySet="vwEvent_Attendance">
+                <ScalarProperty Name="Year_Id" ColumnName="Year_Id" />
+                <ScalarProperty Name="Month_Num" ColumnName="Month_Num" />
+                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Event_Type_Desc" ColumnName="Event_Type_Desc" />
+                <ScalarProperty Name="Event_Role_Desc" ColumnName="Event_Role_Desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="Model.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
