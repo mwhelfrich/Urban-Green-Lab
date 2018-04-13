@@ -42,6 +42,9 @@ namespace UrbanLab.Responses
         public DateTime Modified_Datetime { get; set; }
         public string Active_Ind { get; set; }
         public long? Org_Id { get; set; }
+
+        public List<int> ContactTypeIdList { get; set; }
+        public List<int> ContactProgramRelationIdList { get; set; }
     }
 
     public class ContactPersonList : BaseResponse
@@ -59,8 +62,7 @@ namespace UrbanLab.Responses
         public ContactPerson ContactPerson { get; set; }
         public List<ContactOrganization> ContactOrganization { get; set; }
         public List<EventInfo> ContactEventInfo { get; set; }
-
-       
+        
     }
 
    public class EventInfoList: BaseResponse
@@ -126,5 +128,5 @@ namespace UrbanLab.Responses
     {
         public long EventID { get; set; }
         public List<EventContactRole> EventContactRole { get; set; }
-    }
+    }    
 }

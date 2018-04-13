@@ -24,10 +24,10 @@ namespace UrbanLab
         public string Donor_Email_Id { get; set; }
         public string Donor_Employer { get; set; }
         public string Campaign_Name { get; set; }
-        public Nullable<decimal> Tran_Amt { get; set; }
-        public Nullable<System.DateTime> Tran_Date { get; set; }
-        public string Tran_Check_Num { get; set; }
-        public string Tran_Card_Last4 { get; set; }
+        public Nullable<decimal> Transaction_Amt { get; set; }
+        public Nullable<System.DateTime> Transaction_Date { get; set; }
+        public string Transaction_Type { get; set; }
+        public string Transaction_ID { get; set; }
         public Nullable<System.DateTime> Load_Datetime { get; set; }
         public Nullable<System.DateTime> Modified_Datetime { get; set; }
         public Nullable<long> Donor_Contact_Id { get; set; }

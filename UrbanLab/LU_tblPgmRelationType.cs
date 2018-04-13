@@ -14,9 +14,16 @@ namespace UrbanLab
     
     public partial class LU_tblPgmRelationType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LU_tblPgmRelationType()
+        {
+            this.tblContact_PgmRelation_Types = new HashSet<tblContact_PgmRelation_Types>();
+        }
+    
         public int PgmRelation_Type_Id { get; set; }
         public string PgmRelation_Type_Desc { get; set; }
     
-        public virtual tblContact_PgmRelation_Types tblContact_PgmRelation_Types { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblContact_PgmRelation_Types> tblContact_PgmRelation_Types { get; set; }
     }
 }

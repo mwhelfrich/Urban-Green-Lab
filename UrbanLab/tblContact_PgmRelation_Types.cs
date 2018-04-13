@@ -15,7 +15,7 @@ namespace UrbanLab
     public partial class tblContact_PgmRelation_Types
     {
         public long PgmRelation_Id { get; set; }
-        public Nullable<long> PgmRelation_Contact_Id { get; set; }
+        public long Person_Contact_Id { get; set; }
         public int PgmRelation_Type_Id { get; set; }
         public Nullable<System.DateTime> Create_Datetime { get; set; }
         public Nullable<System.DateTime> Modified_Datetime { get; set; }

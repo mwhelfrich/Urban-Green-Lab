@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6013: The table/view 'UGL-Greenhouse.dbo.LU_Date' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="LU_Date">
@@ -93,7 +93,7 @@ warning 6013: The table/view 'UGL-Greenhouse.dbo.LU_Date' does not have a primar
           </Key>
           <Property Name="Org_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Org_Name" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="Email_Id" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Email_Id" Type="varchar" MaxLength="80" />
           <Property Name="Primary_Contact" Type="bigint" />
           <Property Name="Addr_Street" Type="varchar" MaxLength="100" />
           <Property Name="Addr_City" Type="varchar" MaxLength="50" />
@@ -152,10 +152,10 @@ warning 6013: The table/view 'UGL-Greenhouse.dbo.LU_Date' does not have a primar
         </EntityType>
         <EntityType Name="tblContact_PgmRelation_Types">
           <Key>
-            <PropertyRef Name="PgmRelation_Type_Id" />
+            <PropertyRef Name="PgmRelation_Id" />
           </Key>
           <Property Name="PgmRelation_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PgmRelation_Contact_Id" Type="bigint" />
+          <Property Name="Person_Contact_Id" Type="bigint" Nullable="false" />
           <Property Name="PgmRelation_Type_Id" Type="int" Nullable="false" />
           <Property Name="Create_Datetime" Type="datetime" />
           <Property Name="Modified_Datetime" Type="datetime" />
@@ -174,10 +174,10 @@ warning 6013: The table/view 'UGL-Greenhouse.dbo.LU_Date' does not have a primar
           <Property Name="Donor_Email_Id" Type="varchar" MaxLength="80" />
           <Property Name="Donor_Employer" Type="varchar" MaxLength="80" />
           <Property Name="Campaign_Name" Type="varchar" MaxLength="255" />
-          <Property Name="Tran_Amt" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="Tran_Date" Type="date" />
-          <Property Name="Tran_Check_Num" Type="varchar" MaxLength="20" />
-          <Property Name="Tran_Card_Last4" Type="char" MaxLength="4" />
+          <Property Name="Transaction_Amt" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Transaction_Date" Type="date" />
+          <Property Name="Transaction_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Transaction_ID" Type="varchar" MaxLength="50" />
           <Property Name="Load_Datetime" Type="datetime" />
           <Property Name="Modified_Datetime" Type="datetime" />
           <Property Name="Donor_Contact_Id" Type="bigint" />
@@ -301,21 +301,21 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblContac__PgmRe__71D1E811">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+        <Association Name="FK__tblContac__Perso__7B5B524B">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="1" />
           <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
             </Principal>
             <Dependent Role="tblContact_PgmRelation_Types">
-              <PropertyRef Name="PgmRelation_Contact_Id" />
+              <PropertyRef Name="Person_Contact_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblContac__PgmRe__72C60C4A">
+        <Association Name="FK__tblContac__PgmRe__7C4F7684">
           <End Role="LU_tblPgmRelationType" Type="Self.LU_tblPgmRelationType" Multiplicity="1" />
-          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="0..1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblPgmRelationType">
               <PropertyRef Name="PgmRelation_Type_Id" />
@@ -460,11 +460,11 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             <End Role="tblContact_Person" EntitySet="tblContact_Person" />
             <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblContac__PgmRe__71D1E811" Association="Self.FK__tblContac__PgmRe__71D1E811">
+          <AssociationSet Name="FK__tblContac__Perso__7B5B524B" Association="Self.FK__tblContac__Perso__7B5B524B">
             <End Role="tblContact_Person" EntitySet="tblContact_Person" />
             <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblContac__PgmRe__72C60C4A" Association="Self.FK__tblContac__PgmRe__72C60C4A">
+          <AssociationSet Name="FK__tblContac__PgmRe__7C4F7684" Association="Self.FK__tblContac__PgmRe__7C4F7684">
             <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
             <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
           </AssociationSet>
@@ -497,58 +497,121 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             <End Role="tblContact_Org" EntitySet="tblContact_Org" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="UGLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LU_tblContactType" EntityType="Model.LU_tblContactType" />
+          <EntitySet Name="LU_tblEvent_Role" EntityType="Model.LU_tblEvent_Role" />
+          <EntitySet Name="LU_tblEventStatus" EntityType="Model.LU_tblEventStatus" />
+          <EntitySet Name="LU_tblEventType" EntityType="Model.LU_tblEventType" />
+          <EntitySet Name="LU_tblPgmRelationType" EntityType="Model.LU_tblPgmRelationType" />
+          <EntitySet Name="tblContact_Org" EntityType="Model.tblContact_Org" />
+          <EntitySet Name="tblContact_Person" EntityType="Model.tblContact_Person" />
+          <EntitySet Name="tblContact_Person_Types" EntityType="Model.tblContact_Person_Types" />
+          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="Model.tblContact_PgmRelation_Types" />
+          <EntitySet Name="tblDonation_Info" EntityType="Model.tblDonation_Info" />
+          <EntitySet Name="tblEvent_Info" EntityType="Model.tblEvent_Info" />
+          <EntitySet Name="tblEvent_Roster" EntityType="Model.tblEvent_Roster" />
+          <EntitySet Name="vwEvent_Attendance" EntityType="Model.vwEvent_Attendance" />
+          <EntitySet Name="database_firewall_rules" EntityType="Model.database_firewall_rules" />
+          <AssociationSet Name="FK__tblContac__Conta__6FE99F9F" Association="Model.FK__tblContac__Conta__6FE99F9F">
+            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__76969D2E" Association="Model.FK__tblEvent___Conta__76969D2E">
+            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Statu__75A278F5" Association="Model.FK__tblEvent___Statu__75A278F5">
+            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__73BA3083" Association="Model.FK__tblEvent___Event__73BA3083">
+            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__7C4F7684" Association="Model.FK__tblContac__PgmRe__7C4F7684">
+            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Org_I__6EF57B66" Association="Model.FK__tblContac__Org_I__6EF57B66">
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Person" Association="Model.FK_Contact_Person">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__70DDC3D8" Association="Model.FK__tblContac__Perso__70DDC3D8">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__7B5B524B" Association="Model.FK__tblContac__Perso__7B5B524B">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__778AC167" Association="Model.FK__tblEvent___Conta__778AC167">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Prima__74AE54BC" Association="Model.FK__tblEvent___Prima__74AE54BC">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__787EE5A0" Association="Model.FK__tblEvent___Event__787EE5A0">
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="LU_tblContactType">
           <Key>
             <PropertyRef Name="Contact_Type_Id" />
           </Key>
           <Property Name="Contact_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contact_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblContact_Person_Types" Relationship="Self.FK__tblContac__Conta__6FE99F9F" FromRole="LU_tblContactType" ToRole="tblContact_Person_Types" />
+          <Property Name="Contact_Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="Model.FK__tblContac__Conta__6FE99F9F" FromRole="LU_tblContactType" ToRole="tblContact_Person_Types" />
         </EntityType>
         <EntityType Name="LU_tblEvent_Role">
           <Key>
             <PropertyRef Name="Event_Role_Id" />
           </Key>
           <Property Name="Event_Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Event_Role_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Conta__76969D2E" FromRole="LU_tblEvent_Role" ToRole="tblEvent_Roster" />
+          <Property Name="Event_Role_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Model.FK__tblEvent___Conta__76969D2E" FromRole="LU_tblEvent_Role" ToRole="tblEvent_Roster" />
         </EntityType>
         <EntityType Name="LU_tblEventStatus">
           <Key>
             <PropertyRef Name="Event_Status_Id" />
           </Key>
           <Property Name="Event_Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Event_Status_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Statu__75A278F5" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
+          <Property Name="Event_Status_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Model.FK__tblEvent___Statu__75A278F5" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="LU_tblEventType">
           <Key>
             <PropertyRef Name="Event_Type_Id" />
           </Key>
           <Property Name="Event_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Event_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__73BA3083" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
+          <Property Name="Event_Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Model.FK__tblEvent___Event__73BA3083" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="LU_tblPgmRelationType">
           <Key>
             <PropertyRef Name="PgmRelation_Type_Id" />
           </Key>
           <Property Name="PgmRelation_Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PgmRelation_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Self.FK__tblContac__PgmRe__72C60C4A" FromRole="LU_tblPgmRelationType" ToRole="tblContact_PgmRelation_Types" />
+          <Property Name="PgmRelation_Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Model.FK__tblContac__PgmRe__7C4F7684" FromRole="LU_tblPgmRelationType" ToRole="tblContact_PgmRelation_Types" />
         </EntityType>
         <EntityType Name="tblContact_Org">
           <Key>
             <PropertyRef Name="Org_Id" />
           </Key>
           <Property Name="Org_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Org_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Org_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Primary_Contact" Type="Int64" />
           <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -556,24 +619,24 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Phone_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Addr_Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Org" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblContact_Person1" Relationship="Self.FK_Contact_Person" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Model.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblContact_Person1" Relationship="Model.FK_Contact_Person" FromRole="tblContact_Org" ToRole="tblContact_Person" />
         </EntityType>
         <EntityType Name="tblContact_Person">
           <Key>
             <PropertyRef Name="Person_Contact_Id" />
           </Key>
           <Property Name="Person_Contact_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name_Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Primary_Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Primary_Email_Id" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -583,7 +646,7 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Intro_Contact" Type="Int64" />
           <Property Name="Job_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Org_Id" Type="Int64" />
           <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -596,12 +659,12 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Introduced_By" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="tblContact_Org" Relationship="Self.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Person" ToRole="tblContact_Org" />
-          <NavigationProperty Name="tblContact_Org1" Relationship="Self.FK_Contact_Person" FromRole="tblContact_Person" ToRole="tblContact_Org" />
-          <NavigationProperty Name="tblContact_Person_Types" Relationship="Self.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person" ToRole="tblContact_Person_Types" />
-          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Self.FK__tblContac__PgmRe__71D1E811" FromRole="tblContact_Person" ToRole="tblContact_PgmRelation_Types" />
-          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Conta__778AC167" FromRole="tblContact_Person" ToRole="tblEvent_Roster" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Prima__74AE54BC" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
+          <NavigationProperty Name="tblContact_Org" Relationship="Model.FK__tblContac__Org_I__6EF57B66" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Org1" Relationship="Model.FK_Contact_Person" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="Model.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person" ToRole="tblContact_Person_Types" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="Model.FK__tblContac__Perso__7B5B524B" FromRole="tblContact_Person" ToRole="tblContact_PgmRelation_Types" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Model.FK__tblEvent___Conta__778AC167" FromRole="tblContact_Person" ToRole="tblEvent_Roster" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Model.FK__tblEvent___Prima__74AE54BC" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="tblContact_Person_Types">
           <Key>
@@ -612,27 +675,27 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Contact_Type_Id" Type="Int32" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LU_tblContactType" Relationship="Self.FK__tblContac__Conta__6FE99F9F" FromRole="tblContact_Person_Types" ToRole="LU_tblContactType" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person_Types" ToRole="tblContact_Person" />
+          <NavigationProperty Name="LU_tblContactType" Relationship="Model.FK__tblContac__Conta__6FE99F9F" FromRole="tblContact_Person_Types" ToRole="LU_tblContactType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Model.FK__tblContac__Perso__70DDC3D8" FromRole="tblContact_Person_Types" ToRole="tblContact_Person" />
         </EntityType>
         <EntityType Name="tblContact_PgmRelation_Types">
           <Key>
-            <PropertyRef Name="PgmRelation_Type_Id" />
+            <PropertyRef Name="PgmRelation_Id" />
           </Key>
           <Property Name="PgmRelation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PgmRelation_Contact_Id" Type="Int64" />
+          <Property Name="Person_Contact_Id" Type="Int64" Nullable="false" />
           <Property Name="PgmRelation_Type_Id" Type="Int32" Nullable="false" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LU_tblPgmRelationType" Relationship="Self.FK__tblContac__PgmRe__72C60C4A" FromRole="tblContact_PgmRelation_Types" ToRole="LU_tblPgmRelationType" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__PgmRe__71D1E811" FromRole="tblContact_PgmRelation_Types" ToRole="tblContact_Person" />
+          <NavigationProperty Name="LU_tblPgmRelationType" Relationship="Model.FK__tblContac__PgmRe__7C4F7684" FromRole="tblContact_PgmRelation_Types" ToRole="LU_tblPgmRelationType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Model.FK__tblContac__Perso__7B5B524B" FromRole="tblContact_PgmRelation_Types" ToRole="tblContact_Person" />
         </EntityType>
         <EntityType Name="tblDonation_Info">
           <Key>
             <PropertyRef Name="Donation_Id" />
           </Key>
           <Property Name="Donation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Donor_First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Donor_First_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Donor_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Donor_Contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Is_Donor_Org_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -641,10 +704,10 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Donor_Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Donor_Employer" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Campaign_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Tran_Amt" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="Tran_Date" Type="DateTime" Precision="0" />
-          <Property Name="Tran_Check_Num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Tran_Card_Last4" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Transaction_Amt" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Transaction_Date" Type="DateTime" Precision="0" />
+          <Property Name="Transaction_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Transaction_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Load_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Donor_Contact_Id" Type="Int64" />
@@ -655,7 +718,7 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </Key>
           <Property Name="Event_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Event_Type_Id" Type="Int32" />
-          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Event_Date" Type="DateTime" Precision="0" />
           <Property Name="Planned_Start" Type="DateTime" Precision="7" />
@@ -668,7 +731,7 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Adult_Cnt" Type="Int64" />
           <Property Name="Child_Cnt" Type="Int64" />
           <Property Name="Mileage" Type="Decimal" Precision="7" Scale="2" />
@@ -680,10 +743,10 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Involved_Org_Cnt" Type="Int32" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="LU_tblEventStatus" Relationship="Self.FK__tblEvent___Statu__75A278F5" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
-          <NavigationProperty Name="LU_tblEventType" Relationship="Self.FK__tblEvent___Event__73BA3083" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Prima__74AE54BC" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Info" ToRole="tblEvent_Roster" />
+          <NavigationProperty Name="LU_tblEventStatus" Relationship="Model.FK__tblEvent___Statu__75A278F5" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
+          <NavigationProperty Name="LU_tblEventType" Relationship="Model.FK__tblEvent___Event__73BA3083" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Model.FK__tblEvent___Prima__74AE54BC" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="Model.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Info" ToRole="tblEvent_Roster" />
         </EntityType>
         <EntityType Name="tblEvent_Roster">
           <Key>
@@ -696,9 +759,9 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Contact_Event_Role" Type="Int32" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="7" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="LU_tblEvent_Role" Relationship="Self.FK__tblEvent___Conta__76969D2E" FromRole="tblEvent_Roster" ToRole="LU_tblEvent_Role" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Conta__778AC167" FromRole="tblEvent_Roster" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Roster" ToRole="tblEvent_Info" />
+          <NavigationProperty Name="LU_tblEvent_Role" Relationship="Model.FK__tblEvent___Conta__76969D2E" FromRole="tblEvent_Roster" ToRole="LU_tblEvent_Role" />
+          <NavigationProperty Name="tblContact_Person" Relationship="Model.FK__tblEvent___Conta__778AC167" FromRole="tblEvent_Roster" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="Model.FK__tblEvent___Event__787EE5A0" FromRole="tblEvent_Roster" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="vwEvent_Attendance">
           <Key>
@@ -716,8 +779,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <Property Name="Contact_Hours" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="Contact_Event_Role" Type="Int32" />
           <Property Name="Event_Type_Id" Type="Int32" />
-          <Property Name="Event_Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Event_Role_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Event_Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Event_Role_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="database_firewall_rules">
           <Key>
@@ -729,15 +792,15 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             <PropertyRef Name="modify_date" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__tblContac__Conta__6FE99F9F">
-          <End Role="LU_tblContactType" Type="Self.LU_tblContactType" Multiplicity="0..1" />
-          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <End Type="Model.LU_tblContactType" Role="LU_tblContactType" Multiplicity="0..1" />
+          <End Type="Model.tblContact_Person_Types" Role="tblContact_Person_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblContactType">
               <PropertyRef Name="Contact_Type_Id" />
@@ -748,8 +811,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Conta__76969D2E">
-          <End Role="LU_tblEvent_Role" Type="Self.LU_tblEvent_Role" Multiplicity="0..1" />
-          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <End Type="Model.LU_tblEvent_Role" Role="LU_tblEvent_Role" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEvent_Role">
               <PropertyRef Name="Event_Role_Id" />
@@ -760,8 +823,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Statu__75A278F5">
-          <End Role="LU_tblEventStatus" Type="Self.LU_tblEventStatus" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="Model.LU_tblEventStatus" Role="LU_tblEventStatus" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventStatus">
               <PropertyRef Name="Event_Status_Id" />
@@ -772,8 +835,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Event__73BA3083">
-          <End Role="LU_tblEventType" Type="Self.LU_tblEventType" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="Model.LU_tblEventType" Role="LU_tblEventType" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventType">
               <PropertyRef Name="Event_Type_Id" />
@@ -783,9 +846,9 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblContac__PgmRe__72C60C4A">
-          <End Role="LU_tblPgmRelationType" Type="Self.LU_tblPgmRelationType" Multiplicity="1" />
-          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="0..1" />
+        <Association Name="FK__tblContac__PgmRe__7C4F7684">
+          <End Type="Model.LU_tblPgmRelationType" Role="LU_tblPgmRelationType" Multiplicity="1" />
+          <End Type="Model.tblContact_PgmRelation_Types" Role="tblContact_PgmRelation_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblPgmRelationType">
               <PropertyRef Name="PgmRelation_Type_Id" />
@@ -796,8 +859,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblContac__Org_I__6EF57B66">
-          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="0..1" />
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+          <End Type="Model.tblContact_Org" Role="tblContact_Org" Multiplicity="0..1" />
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Org">
               <PropertyRef Name="Org_Id" />
@@ -808,8 +871,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contact_Person">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="*" />
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="Model.tblContact_Org" Role="tblContact_Org" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
@@ -820,8 +883,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblContac__Perso__70DDC3D8">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="Model.tblContact_Person_Types" Role="tblContact_Person_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
@@ -831,21 +894,21 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblContac__PgmRe__71D1E811">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
+        <Association Name="FK__tblContac__Perso__7B5B524B">
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="1" />
+          <End Type="Model.tblContact_PgmRelation_Types" Role="tblContact_PgmRelation_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
             </Principal>
             <Dependent Role="tblContact_PgmRelation_Types">
-              <PropertyRef Name="PgmRelation_Contact_Id" />
+              <PropertyRef Name="Person_Contact_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Conta__778AC167">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
@@ -856,8 +919,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Prima__74AE54BC">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="Model.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Person_Contact_Id" />
@@ -868,8 +931,8 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Event__787EE5A0">
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="0..1" />
-          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <End Type="Model.tblEvent_Info" Role="tblEvent_Info" Multiplicity="0..1" />
+          <End Type="Model.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblEvent_Info">
               <PropertyRef Name="Event_Id" />
@@ -879,70 +942,6 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UGLEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="LU_tblContactType" EntityType="Self.LU_tblContactType" />
-          <EntitySet Name="LU_tblEvent_Role" EntityType="Self.LU_tblEvent_Role" />
-          <EntitySet Name="LU_tblEventStatus" EntityType="Self.LU_tblEventStatus" />
-          <EntitySet Name="LU_tblEventType" EntityType="Self.LU_tblEventType" />
-          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" />
-          <EntitySet Name="tblContact_Org" EntityType="Self.tblContact_Org" />
-          <EntitySet Name="tblContact_Person" EntityType="Self.tblContact_Person" />
-          <EntitySet Name="tblContact_Person_Types" EntityType="Self.tblContact_Person_Types" />
-          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="Self.tblContact_PgmRelation_Types" />
-          <EntitySet Name="tblDonation_Info" EntityType="Self.tblDonation_Info" />
-          <EntitySet Name="tblEvent_Info" EntityType="Self.tblEvent_Info" />
-          <EntitySet Name="tblEvent_Roster" EntityType="Self.tblEvent_Roster" />
-          <EntitySet Name="vwEvent_Attendance" EntityType="Self.vwEvent_Attendance" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-          <AssociationSet Name="FK__tblContac__Conta__6FE99F9F" Association="Self.FK__tblContac__Conta__6FE99F9F">
-            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
-            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Conta__76969D2E" Association="Self.FK__tblEvent___Conta__76969D2E">
-            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
-            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Statu__75A278F5" Association="Self.FK__tblEvent___Statu__75A278F5">
-            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Event__73BA3083" Association="Self.FK__tblEvent___Event__73BA3083">
-            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblContac__PgmRe__72C60C4A" Association="Self.FK__tblContac__PgmRe__72C60C4A">
-            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
-            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblContac__Org_I__6EF57B66" Association="Self.FK__tblContac__Org_I__6EF57B66">
-            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contact_Person" Association="Self.FK_Contact_Person">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblContac__Perso__70DDC3D8" Association="Self.FK__tblContac__Perso__70DDC3D8">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblContac__PgmRe__71D1E811" Association="Self.FK__tblContac__PgmRe__71D1E811">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Conta__778AC167" Association="Self.FK__tblEvent___Conta__778AC167">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Prima__74AE54BC" Association="Self.FK__tblEvent___Prima__74AE54BC">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Event__787EE5A0" Association="Self.FK__tblEvent___Event__787EE5A0">
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -952,216 +951,216 @@ warning 6002: The table/view 'UGL-Greenhouse.sys.database_firewall_rules' does n
           <EntitySetMapping Name="LU_tblContactType">
             <EntityTypeMapping TypeName="Model.LU_tblContactType">
               <MappingFragment StoreEntitySet="LU_tblContactType">
-                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
                 <ScalarProperty Name="Contact_Type_Desc" ColumnName="Contact_Type_Desc" />
+                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LU_tblEvent_Role">
             <EntityTypeMapping TypeName="Model.LU_tblEvent_Role">
               <MappingFragment StoreEntitySet="LU_tblEvent_Role">
-                <ScalarProperty Name="Event_Role_Id" ColumnName="Event_Role_Id" />
                 <ScalarProperty Name="Event_Role_Desc" ColumnName="Event_Role_Desc" />
+                <ScalarProperty Name="Event_Role_Id" ColumnName="Event_Role_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LU_tblEventStatus">
             <EntityTypeMapping TypeName="Model.LU_tblEventStatus">
               <MappingFragment StoreEntitySet="LU_tblEventStatus">
-                <ScalarProperty Name="Event_Status_Id" ColumnName="Event_Status_Id" />
                 <ScalarProperty Name="Event_Status_Desc" ColumnName="Event_Status_Desc" />
+                <ScalarProperty Name="Event_Status_Id" ColumnName="Event_Status_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LU_tblEventType">
             <EntityTypeMapping TypeName="Model.LU_tblEventType">
               <MappingFragment StoreEntitySet="LU_tblEventType">
-                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
                 <ScalarProperty Name="Event_Type_Desc" ColumnName="Event_Type_Desc" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LU_tblPgmRelationType">
             <EntityTypeMapping TypeName="Model.LU_tblPgmRelationType">
               <MappingFragment StoreEntitySet="LU_tblPgmRelationType">
-                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
                 <ScalarProperty Name="PgmRelation_Type_Desc" ColumnName="PgmRelation_Type_Desc" />
+                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContact_Org">
             <EntityTypeMapping TypeName="Model.tblContact_Org">
               <MappingFragment StoreEntitySet="tblContact_Org">
-                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
-                <ScalarProperty Name="Org_Name" ColumnName="Org_Name" />
-                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
-                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
-                <ScalarProperty Name="Phone_Type" ColumnName="Phone_Type" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
-                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
-                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
                 <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Phone_Type" ColumnName="Phone_Type" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Org_Name" ColumnName="Org_Name" />
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContact_Person">
             <EntityTypeMapping TypeName="Model.tblContact_Person">
               <MappingFragment StoreEntitySet="tblContact_Person">
-                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Name_Prefix" ColumnName="Name_Prefix" />
-                <ScalarProperty Name="Primary_Email_Id" ColumnName="Primary_Email_Id" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Phone_Other" ColumnName="Phone_Other" />
-                <ScalarProperty Name="Phone_Cell" ColumnName="Phone_Cell" />
-                <ScalarProperty Name="Intro_Contact" ColumnName="Intro_Contact" />
-                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
-                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
-                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
-                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
-                <ScalarProperty Name="Secondary_Email_Id" ColumnName="Secondary_Email_Id" />
-                <ScalarProperty Name="Volunteer_Interest_Ind" ColumnName="Volunteer_Interest_Ind" />
-                <ScalarProperty Name="Address_Line_1" ColumnName="Address_Line_1" />
-                <ScalarProperty Name="Address_Line_2" ColumnName="Address_Line_2" />
-                <ScalarProperty Name="Address_Line_3" ColumnName="Address_Line_3" />
-                <ScalarProperty Name="Introduced_By" ColumnName="Introduced_By" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
                 <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Introduced_By" ColumnName="Introduced_By" />
+                <ScalarProperty Name="Address_Line_3" ColumnName="Address_Line_3" />
+                <ScalarProperty Name="Address_Line_2" ColumnName="Address_Line_2" />
+                <ScalarProperty Name="Address_Line_1" ColumnName="Address_Line_1" />
+                <ScalarProperty Name="Volunteer_Interest_Ind" ColumnName="Volunteer_Interest_Ind" />
+                <ScalarProperty Name="Secondary_Email_Id" ColumnName="Secondary_Email_Id" />
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Job_Title" ColumnName="Job_Title" />
+                <ScalarProperty Name="Intro_Contact" ColumnName="Intro_Contact" />
+                <ScalarProperty Name="Phone_Cell" ColumnName="Phone_Cell" />
+                <ScalarProperty Name="Phone_Other" ColumnName="Phone_Other" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Primary_Email_Id" ColumnName="Primary_Email_Id" />
+                <ScalarProperty Name="Name_Prefix" ColumnName="Name_Prefix" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContact_Person_Types">
             <EntityTypeMapping TypeName="Model.tblContact_Person_Types">
               <MappingFragment StoreEntitySet="tblContact_Person_Types">
-                <ScalarProperty Name="Person_Type_Id" ColumnName="Person_Type_Id" />
-                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
-                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
                 <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
+                <ScalarProperty Name="Person_Type_Id" ColumnName="Person_Type_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblContact_PgmRelation_Types">
             <EntityTypeMapping TypeName="Model.tblContact_PgmRelation_Types">
               <MappingFragment StoreEntitySet="tblContact_PgmRelation_Types">
-                <ScalarProperty Name="PgmRelation_Id" ColumnName="PgmRelation_Id" />
-                <ScalarProperty Name="PgmRelation_Contact_Id" ColumnName="PgmRelation_Contact_Id" />
-                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
                 <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
+                <ScalarProperty Name="PgmRelation_Id" ColumnName="PgmRelation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblDonation_Info">
             <EntityTypeMapping TypeName="Model.tblDonation_Info">
               <MappingFragment StoreEntitySet="tblDonation_Info">
-                <ScalarProperty Name="Donation_Id" ColumnName="Donation_Id" />
-                <ScalarProperty Name="Donor_First_Name" ColumnName="Donor_First_Name" />
-                <ScalarProperty Name="Donor_Last_Name" ColumnName="Donor_Last_Name" />
-                <ScalarProperty Name="Donor_Contact_Type" ColumnName="Donor_Contact_Type" />
-                <ScalarProperty Name="Is_Donor_Org_Ind" ColumnName="Is_Donor_Org_Ind" />
-                <ScalarProperty Name="Is_Org_Gift" ColumnName="Is_Org_Gift" />
-                <ScalarProperty Name="Donor_Type" ColumnName="Donor_Type" />
-                <ScalarProperty Name="Donor_Email_Id" ColumnName="Donor_Email_Id" />
-                <ScalarProperty Name="Donor_Employer" ColumnName="Donor_Employer" />
-                <ScalarProperty Name="Campaign_Name" ColumnName="Campaign_Name" />
-                <ScalarProperty Name="Tran_Amt" ColumnName="Tran_Amt" />
-                <ScalarProperty Name="Tran_Date" ColumnName="Tran_Date" />
-                <ScalarProperty Name="Tran_Check_Num" ColumnName="Tran_Check_Num" />
-                <ScalarProperty Name="Tran_Card_Last4" ColumnName="Tran_Card_Last4" />
-                <ScalarProperty Name="Load_Datetime" ColumnName="Load_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
                 <ScalarProperty Name="Donor_Contact_Id" ColumnName="Donor_Contact_Id" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Load_Datetime" ColumnName="Load_Datetime" />
+                <ScalarProperty Name="Transaction_ID" ColumnName="Transaction_ID" />
+                <ScalarProperty Name="Transaction_Type" ColumnName="Transaction_Type" />
+                <ScalarProperty Name="Transaction_Date" ColumnName="Transaction_Date" />
+                <ScalarProperty Name="Transaction_Amt" ColumnName="Transaction_Amt" />
+                <ScalarProperty Name="Campaign_Name" ColumnName="Campaign_Name" />
+                <ScalarProperty Name="Donor_Employer" ColumnName="Donor_Employer" />
+                <ScalarProperty Name="Donor_Email_Id" ColumnName="Donor_Email_Id" />
+                <ScalarProperty Name="Donor_Type" ColumnName="Donor_Type" />
+                <ScalarProperty Name="Is_Org_Gift" ColumnName="Is_Org_Gift" />
+                <ScalarProperty Name="Is_Donor_Org_Ind" ColumnName="Is_Donor_Org_Ind" />
+                <ScalarProperty Name="Donor_Contact_Type" ColumnName="Donor_Contact_Type" />
+                <ScalarProperty Name="Donor_Last_Name" ColumnName="Donor_Last_Name" />
+                <ScalarProperty Name="Donor_First_Name" ColumnName="Donor_First_Name" />
+                <ScalarProperty Name="Donation_Id" ColumnName="Donation_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblEvent_Info">
             <EntityTypeMapping TypeName="Model.tblEvent_Info">
               <MappingFragment StoreEntitySet="tblEvent_Info">
-                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
-                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
-                <ScalarProperty Name="Planned_Start" ColumnName="Planned_Start" />
-                <ScalarProperty Name="Planned_End" ColumnName="Planned_End" />
-                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
-                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
-                <ScalarProperty Name="GPS_Location" ColumnName="GPS_Location" />
-                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-                <ScalarProperty Name="Adult_Cnt" ColumnName="Adult_Cnt" />
-                <ScalarProperty Name="Child_Cnt" ColumnName="Child_Cnt" />
-                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
-                <ScalarProperty Name="Average_Score" ColumnName="Average_Score" />
-                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Photo_Release_Ind" ColumnName="Photo_Release_Ind" />
-                <ScalarProperty Name="Photo_Code" ColumnName="Photo_Code" />
-                <ScalarProperty Name="Involved_Org_Cnt" ColumnName="Involved_Org_Cnt" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
                 <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Involved_Org_Cnt" ColumnName="Involved_Org_Cnt" />
+                <ScalarProperty Name="Photo_Code" ColumnName="Photo_Code" />
+                <ScalarProperty Name="Photo_Release_Ind" ColumnName="Photo_Release_Ind" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
+                <ScalarProperty Name="Average_Score" ColumnName="Average_Score" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Child_Cnt" ColumnName="Child_Cnt" />
+                <ScalarProperty Name="Adult_Cnt" ColumnName="Adult_Cnt" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="GPS_Location" ColumnName="GPS_Location" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
+                <ScalarProperty Name="Planned_End" ColumnName="Planned_End" />
+                <ScalarProperty Name="Planned_Start" ColumnName="Planned_Start" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblEvent_Roster">
             <EntityTypeMapping TypeName="Model.tblEvent_Roster">
               <MappingFragment StoreEntitySet="tblEvent_Roster">
-                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
-                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
-                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
-                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
-                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
                 <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="vwEvent_Attendance">
             <EntityTypeMapping TypeName="Model.vwEvent_Attendance">
               <MappingFragment StoreEntitySet="vwEvent_Attendance">
-                <ScalarProperty Name="Year_Id" ColumnName="Year_Id" />
-                <ScalarProperty Name="Month_Num" ColumnName="Month_Num" />
-                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
-                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
-                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
-                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
-                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
-                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
-                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
-                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
-                <ScalarProperty Name="Event_Type_Desc" ColumnName="Event_Type_Desc" />
                 <ScalarProperty Name="Event_Role_Desc" ColumnName="Event_Role_Desc" />
+                <ScalarProperty Name="Event_Type_Desc" ColumnName="Event_Type_Desc" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
+                <ScalarProperty Name="Month_Num" ColumnName="Month_Num" />
+                <ScalarProperty Name="Year_Id" ColumnName="Year_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="database_firewall_rules">
             <EntityTypeMapping TypeName="Model.database_firewall_rules">
               <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -42,8 +42,6 @@ namespace UrbanLab.Controllers
             return cl.CreateContact(request);
         }
 
-
-
         [HttpPost]
         [Route("CreateOrganization")]
         public BaseResponse CreateOrganization(ContactOrganization request)
@@ -68,7 +66,6 @@ namespace UrbanLab.Controllers
             return cl.CreateEventContacts(request);
         }
 
-
         [HttpGet]
         [Route("GetOrganization")]
         public ContactOrganizationList GetOrganizations()
@@ -92,7 +89,5 @@ namespace UrbanLab.Controllers
             ContactLogic cl = new ContactLogic();
             return cl.GetEventInfo();
         }
-
-
     }
 }

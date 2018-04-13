@@ -15,6 +15,7 @@ namespace UrbanLab.TableAdapters
         {
             this.auditClient = auditClient;
         }
+
         #region Public Methods
 
         #region Get by ID
@@ -32,7 +33,22 @@ namespace UrbanLab.TableAdapters
             }
             else
                 return null;
+        }
 
+        public List<int> GetContactTypeByContactID(long contactID)
+        {
+            UGLEntities DataContext = new UGLEntities();
+            return (from items in DataContext.tblContact_Person_Types
+                    where items.Person_Contact_Id == contactID
+                    select items).Select(x => x.Contact_Type_Id.Value).ToList();
+        }
+
+        public List<int> GetContactProgramRelationByContactID(long contactID)
+        {
+            UGLEntities DataContext = new UGLEntities();
+            return (from items in DataContext.tblContact_PgmRelation_Types
+                    where items.Person_Contact_Id == contactID
+                    select items).Select(x => x.PgmRelation_Type_Id).ToList();
         }
 
         internal tblContact_Org GetAllOrganizationByID(long OrgID)
@@ -66,6 +82,25 @@ namespace UrbanLab.TableAdapters
             else
                 return null;
         }
+
+        public List<EventContactRole> GetEventRoleByEventID(long eveID)
+        {
+            UGLEntities DataContext = new UGLEntities();
+            var a = (from items in DataContext.tblEvent_Roster
+                     where items.Event_Id == eveID
+                     select items).ToList();
+
+            List<EventContactRole> list = new List<EventContactRole>();
+            foreach(var b in a)
+            {
+                EventContactRole role = new EventContactRole();
+                role.ContactID = b.Contact_Id.Value;
+                role.EventRoleID = b.Contact_Event_Role.Value;
+                list.Add(role);
+            }
+            return list;
+        }
+
 
         #endregion
 
@@ -133,6 +168,33 @@ namespace UrbanLab.TableAdapters
             try
             {
                 d.SaveChanges();
+
+                if (request.ContactTypeIdList != null && request.ContactTypeIdList.Count() > 0)
+                {                    
+                    if (request.Contact_Id > 0)
+                    {
+                        InsertContactPersonType(request.Contact_Id, request.ContactTypeIdList);
+                    }
+                    else
+                    {
+                        long Contact_Id = d.tblContact_Person.Where(x => x.First_Name == request.First_Name && x.Last_Name == request.Last_Name).LastOrDefault().Person_Contact_Id;
+                        InsertContactPersonType(Contact_Id, request.ContactTypeIdList);
+                    }
+                }
+
+                if (request.ContactProgramRelationIdList != null && request.ContactProgramRelationIdList.Count() > 0)
+                {
+                    if (request.Contact_Id > 0)
+                    {
+                        InsertContactProgramRelationType(request.Contact_Id, request.ContactProgramRelationIdList);
+                    }
+                    else
+                    {
+                        long Contact_Id = d.tblContact_Person.Where(x => x.First_Name == request.First_Name && x.Last_Name == request.Last_Name).LastOrDefault().Person_Contact_Id;
+                        InsertContactProgramRelationType(Contact_Id, request.ContactProgramRelationIdList);
+                    }
+                }
+
                 r.Success = true;
                 r.Message = "Contact save successfull.";
             }
@@ -143,38 +205,7 @@ namespace UrbanLab.TableAdapters
 
             }
             return r;
-        }
-
-        internal BaseResponse InsertEventRoster(EventContactRoleList request)
-        {
-            UGLEntities d = new UGLEntities();
-            BaseResponse response = new BaseResponse();
-            try
-            {
-                long eveID = request.EventID;
-                if (request.EventContactRole != null && request.EventContactRole.Count() > 0)
-                {
-                    foreach (var a in request.EventContactRole)
-                    {
-                        tblEvent_Roster ev = new tblEvent_Roster();
-                        ev.Event_Id = eveID;
-                        ev.Contact_Id = a.ContactID;
-                        ev.Contact_Event_Role = a.EventRoleID;
-                        d.tblEvent_Roster.Add(ev);
-                    }
-
-                    d.SaveChanges();
-                }
-                response.Success = true;
-                response.Message = "Event contact map update successful.";
-            }
-            catch(Exception e)
-            {
-                response.Success = false;
-                response.Message = "Event contact map update unsuccessful. Error: "+ e.Message;
-            }
-            return response;
-        }
+        }       
 
         public BaseResponse CreateContactOrganization(ContactOrganization request)
         {
@@ -337,6 +368,98 @@ namespace UrbanLab.TableAdapters
             }
 
             return r;
+        }
+
+        internal BaseResponse InsertEventRoster(EventContactRoleList request)
+        {
+            UGLEntities d = new UGLEntities();
+            BaseResponse response = new BaseResponse();
+            try
+            {
+                long eveID = request.EventID;
+                if (request.EventContactRole != null && request.EventContactRole.Count() > 0)
+                {
+                    foreach (var a in request.EventContactRole)
+                    {
+                        tblEvent_Roster ev = new tblEvent_Roster();
+                        ev.Event_Id = eveID;
+                        ev.Contact_Id = a.ContactID;
+                        ev.Contact_Event_Role = a.EventRoleID;
+                        ev.Create_Datetime = DateTime.Now;
+                        d.tblEvent_Roster.Add(ev);
+                    }
+
+                    d.SaveChanges();
+                }
+                response.Success = true;
+                response.Message = "Event contact map update successful.";
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = "Event contact map update unsuccessful. Error: " + e.Message;
+            }
+            return response;
+        }
+
+        internal BaseResponse InsertContactPersonType(long contactID, List<int> contactTypeID)
+        {
+            UGLEntities d = new UGLEntities();
+            BaseResponse response = new BaseResponse();
+            try
+            {
+                if (contactTypeID != null && contactTypeID.Count() > 0)
+                {
+                    foreach (var a in contactTypeID)
+                    {
+                        tblContact_Person_Types ev = new tblContact_Person_Types();
+                        ev.Person_Contact_Id = contactID;
+                        ev.Contact_Type_Id = a;
+                        ev.Create_Datetime = DateTime.Now;
+                        d.tblContact_Person_Types.Add(ev);
+                    }
+
+                    d.SaveChanges();
+                }
+                response.Success = true;
+                response.Message = "Contact Person map update successful.";
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = "Contact Person map update unsuccessful. Error: " + e.Message;
+            }
+            return response;
+        }
+
+        internal BaseResponse InsertContactProgramRelationType(long contactID, List<int> PgrmRelType)
+        {
+            UGLEntities d = new UGLEntities();
+            BaseResponse response = new BaseResponse();
+            try
+            {
+                if (PgrmRelType != null && PgrmRelType.Count() > 0)
+                {
+                    foreach (var a in PgrmRelType)
+                    {
+                        tblContact_PgmRelation_Types ev = new tblContact_PgmRelation_Types();
+                        ev.Person_Contact_Id = contactID;
+                        ev.PgmRelation_Type_Id = a;
+                        ev.Create_Datetime = DateTime.Now;
+                        d.tblContact_PgmRelation_Types.Add(ev);
+                    }
+
+                    d.SaveChanges();
+                }
+                response.Success = true;
+                response.Message = "Contact Program relation map update successful.";
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Message = "Contact Program relation update unsuccessful. Error: " + e.Message;
+            }
+            return response;
         }
 
         #endregion

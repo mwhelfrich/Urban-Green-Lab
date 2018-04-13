@@ -36,6 +36,8 @@ namespace UrbanLab.Logic
                         c.Name_Prefix = b.Name_Prefix;
                         c.Notes = b.Notes;
                         c.Phone_Cell = b.Phone_Cell;
+                        c.ContactTypeIdList = ContactTableAdapter.GetContactTypeByContactID(b.Person_Contact_Id);
+                        c.ContactProgramRelationIdList = ContactTableAdapter.GetContactProgramRelationByContactID(b.Person_Contact_Id);
                         c.Phone_Other = b.Phone_Other;
                         c.Job_Title = b.Job_Title;
                         contactsList.Add(c);
@@ -69,7 +71,6 @@ namespace UrbanLab.Logic
             {
                 if (b != null)
                 {
-
                     c.Active_Ind = b.Active_Ind;
                     c.Addr_City = b.Addr_City;
                     c.Addr_State = b.Addr_State;
@@ -88,6 +89,8 @@ namespace UrbanLab.Logic
                     c.Phone_Cell = b.Phone_Cell;
                     c.Phone_Other = b.Phone_Other;
                     c.Job_Title = b.Job_Title;
+                    c.ContactTypeIdList = ContactTableAdapter.GetContactTypeByContactID(ContactID);
+                    c.ContactProgramRelationIdList = ContactTableAdapter.GetContactProgramRelationByContactID(ContactID);
                     c.Success = true;
                     c.Message = "Contact: " + c.Last_Name + " with ID: " + c.Contact_Id + " returned successfully.";
                 }
@@ -140,6 +143,7 @@ namespace UrbanLab.Logic
                         e.Notes = b.Notes;
                         e.Photo_Release_Ind = b.Photo_Release_Ind;
                         e.Photo_Code = b.Photo_Code;
+                        e.EventContactRole = ContactTableAdapter.GetEventRoleByEventID(b.Event_Id);
                         eventList.Add(e);
                     }
                 }
@@ -190,7 +194,8 @@ namespace UrbanLab.Logic
                     e.Revenue = b.Revenue.Value;
                     e.Notes = b.Notes;
                     e.Photo_Release_Ind = b.Photo_Release_Ind;
-                    e.Photo_Code = b.Photo_Code;                
+                    e.Photo_Code = b.Photo_Code;
+                    e.EventContactRole = ContactTableAdapter.GetEventRoleByEventID(eventID);
                 }
 
                 e.Success = true;
