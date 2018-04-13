@@ -201,9 +201,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -238,22 +235,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="BuildVersion.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\LookUpController.cs" />
-    <Compile Include="Customer.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerAddress.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="database_firewall_rules.cs">
       <DependentUpon>UGLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ErrorLog.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -279,32 +264,11 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Product.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductCategory.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductDescription.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModel.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductModelProductDescription.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Requests\ContactResult.cs" />
     <Compile Include="Responses\ContactResponse.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="SalesOrderDetail.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SalesOrderHeader.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="TableAdapters\BaseTableAdapter.cs" />
     <Compile Include="TableAdapters\ContactTableAdapter.cs" />
@@ -330,27 +294,6 @@
     <Compile Include="tblEvent_Roster.cs">
       <DependentUpon>UGLModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="UBLModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UBLModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UBLModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UBLModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UBLModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ufnGetAllCategories_Result.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ufnGetCustomerInformation_Result.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UGLModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -365,15 +308,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UGLModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="vGetAllCategory.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vProductAndDescription.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="vProductModelCatalogDescription.cs">
-      <DependentUpon>UBLModel.tt</DependentUpon>
     </Compile>
     <Compile Include="vwEvent_Attendance.cs">
       <DependentUpon>UGLModel.tt</DependentUpon>
@@ -423,16 +357,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="UBLModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UBLModel.edmx</DependentUpon>
-      <LastGenOutput>UBLModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="UBLModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UBLModel.edmx</DependentUpon>
-      <LastGenOutput>UBLModel.cs</LastGenOutput>
-    </Content>
     <Content Include="UGLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UGLModel.edmx</DependentUpon>
@@ -458,13 +382,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <EntityDeploy Include="UBLModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UBLModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="UBLModel.edmx.diagram">
-      <DependentUpon>UBLModel.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="UGLModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UGLModel.Designer.cs</LastGenOutput>
