@@ -24,10 +24,10 @@ namespace UrbanLab
         public Nullable<int> Event_Type_Id { get; set; }
         public string Title { get; set; }
         public Nullable<int> Status { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> Event_Date { get; set; }
         public Nullable<System.DateTime> Planned_Start { get; set; }
         public Nullable<System.DateTime> Planned_End { get; set; }
-        public Nullable<int> Event_Duration { get; set; }
+        public Nullable<decimal> Event_Duration { get; set; }
         public string Location_Name { get; set; }
         public string GPS_Location { get; set; }
         public Nullable<long> Primary_Contact { get; set; }
@@ -46,6 +46,7 @@ namespace UrbanLab
         public string Notes { get; set; }
         public string Photo_Release_Ind { get; set; }
         public string Photo_Code { get; set; }
+        public Nullable<int> Involved_Org_Cnt { get; set; }
     
         public virtual LU_tblEventStatus LU_tblEventStatus { get; set; }
         public virtual LU_tblEventStatus LU_tblEventStatus1 { get; set; }

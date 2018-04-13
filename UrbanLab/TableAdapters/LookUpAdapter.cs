@@ -32,7 +32,7 @@ namespace UrbanLab.TableAdapters
                
             }
            
-            catch(Exception e)
+            catch
             {                
                 return l;
             }

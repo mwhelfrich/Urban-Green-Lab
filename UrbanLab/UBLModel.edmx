@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="misspiggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="misspiggyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BuildVersion">
           <Key>
             <PropertyRef Name="SystemInformationID" />
@@ -28,12 +28,66 @@
           <Property Name="ErrorLine" Type="int" />
           <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'misspiggyDB.dbo.LU_Date' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LU_Date">
+          <Property Name="Date_Id" Type="date" />
+          <Property Name="Week_Id" Type="int" />
+          <Property Name="Week_Num" Type="smallint" />
+          <Property Name="Week_End_Date" Type="int" />
+          <Property Name="Month_Id" Type="int" />
+          <Property Name="Month_Id_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Id_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Num" Type="smallint" />
+          <Property Name="Month_Num_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Month_Num_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Id" Type="int" />
+          <Property Name="Qtr_Desc" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Num" Type="smallint" />
+          <Property Name="Qtr_Num_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Qtr_Num_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Semi_Annual_Id" Type="int" />
+          <Property Name="Semi_Annual_Desc" Type="varchar" MaxLength="20" />
+          <Property Name="Year_Id" Type="smallint" />
+          <Property Name="Day_Of_Week" Type="smallint" />
+          <Property Name="Dow_Desc_S" Type="varchar" MaxLength="15" />
+          <Property Name="Dow_Desc_L" Type="varchar" MaxLength="15" />
+          <Property Name="Day_Of_Month" Type="smallint" />
+          <Property Name="Day_Of_Qtr" Type="smallint" />
+          <Property Name="Day_Of_Year" Type="smallint" />
+          <Property Name="Days_In_Week" Type="smallint" />
+          <Property Name="Days_In_Month" Type="smallint" />
+          <Property Name="Days_In_Qtr" Type="smallint" />
+          <Property Name="Days_In_Year" Type="smallint" />
+          <Property Name="Month_Days_Left" Type="smallint" />
+          <Property Name="Week_Days_Left" Type="smallint" />
+          <Property Name="Qtr_Days_Left" Type="smallint" />
+          <Property Name="Year_Days_Left" Type="smallint" />
+          <Property Name="Week_Day_Flag" Type="smallint" />
+          <Property Name="Week_End_Flag" Type="smallint" />
+          <Property Name="Federal_Bank_Holiday_Flag" Type="char" MaxLength="1" />
+          <Property Name="Hca_Holiday_Flag" Type="char" MaxLength="1" />
+          <Property Name="Pe_Date" Type="date" />
+          <Property Name="Pe_Date_Prior_Month" Type="date" />
+          <Property Name="Week_Of_Month" Type="smallint" />
+          <Property Name="Bank_Day_Flag" Type="smallint" />
+          <Property Name="Qtr_Desc_DSS" Type="char" MaxLength="6" />
+          <Property Name="DW_Last_Update_Date_Time" Type="datetime" />
+          <Property Name="Source_System_Code" Type="char" MaxLength="1" />
+        </EntityType>-->
         <EntityType Name="LU_tblContactType">
           <Key>
             <PropertyRef Name="Type_Id" />
           </Key>
           <Property Name="Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LU_tblEvent_Role">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Desc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="LU_tblEventStatus">
           <Key>
@@ -47,17 +101,11 @@
             <PropertyRef Name="Type_Id" />
           </Key>
           <Property Name="Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Category_ID" Type="int" />
-          <Property Name="Category_Desc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Sub_Category_ID" Type="int" />
-          <Property Name="Sub_Category_Desc" Type="varchar" MaxLength="50" />
+          <Property Name="Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LU_tblPgmRelationType">
           <Key>
             <PropertyRef Name="Type_Id" />
-            <PropertyRef Name="Type_Desc" />
           </Key>
           <Property Name="Type_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type_Desc" Type="varchar" MaxLength="50" Nullable="false" />
@@ -79,13 +127,15 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Create_Datetime" Type="datetime" />
           <Property Name="Modified_Datetime" Type="datetime" />
           <Property Name="Active_Ind" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Kindful_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="SalesForce_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_Country" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblContact_Person">
           <Key>
             <PropertyRef Name="Contact_Id" />
           </Key>
           <Property Name="Contact_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Contact_Type_Id" Type="int" />
           <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Last_Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name_Prefix" Type="varchar" MaxLength="10" />
@@ -106,6 +156,29 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Modified_Datetime" Type="datetime" />
           <Property Name="Active_Ind" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Org_Id" Type="bigint" />
+          <Property Name="Kindful_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="SalesForce_Contact_Id" Type="varchar" MaxLength="50" />
+          <Property Name="Addr_Country" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tblContact_Person_Types">
+          <Key>
+            <PropertyRef Name="Person_Type_Id" />
+          </Key>
+          <Property Name="Person_Type_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Person_Contact_Id" Type="bigint" />
+          <Property Name="Contact_Type_Id" Type="int" />
+          <Property Name="Create_Datetime" Type="datetime" />
+          <Property Name="Modified_Datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblContact_PgmRelation_Types">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PgmRelation_Contact_Id" Type="bigint" />
+          <Property Name="PgmRelation_Type_Id" Type="int" Nullable="false" />
+          <Property Name="Create_Datetime" Type="datetime" />
+          <Property Name="Modified_Datetime" Type="datetime" />
         </EntityType>
         <EntityType Name="tblDonation_Info">
           <Key>
@@ -125,14 +198,9 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Tran_Date" Type="date" />
           <Property Name="Tran_Check_Num" Type="varchar" MaxLength="20" />
           <Property Name="Tran_Card_Last4" Type="char" MaxLength="4" />
-          <Property Name="Addr_Street1" Type="varchar" MaxLength="100" />
-          <Property Name="Addr_Street2" Type="varchar" MaxLength="100" />
-          <Property Name="Addr_City" Type="varchar" MaxLength="50" />
-          <Property Name="Addr_State" Type="varchar" MaxLength="50" />
-          <Property Name="Addr_ZipCode" Type="varchar" MaxLength="20" />
-          <Property Name="Addr_Country" Type="varchar" MaxLength="50" />
           <Property Name="Load_Datetime" Type="datetime" />
           <Property Name="Modified_Datetime" Type="datetime" />
+          <Property Name="Donor_Contact_Id" Type="bigint" />
         </EntityType>
         <EntityType Name="tblEvent_Info">
           <Key>
@@ -142,10 +210,10 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Event_Type_Id" Type="int" />
           <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Status" Type="int" />
-          <Property Name="Date" Type="date" />
+          <Property Name="Event_Date" Type="date" />
           <Property Name="Planned_Start" Type="datetime" />
           <Property Name="Planned_End" Type="datetime" />
-          <Property Name="Event_Duration" Type="int" />
+          <Property Name="Event_Duration" Type="decimal" Precision="5" Scale="2" />
           <Property Name="Location_Name" Type="varchar" MaxLength="255" />
           <Property Name="GPS_Location" Type="varchar" MaxLength="255" />
           <Property Name="Primary_Contact" Type="bigint" />
@@ -164,6 +232,7 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Notes" Type="varchar" MaxLength="1000" />
           <Property Name="Photo_Release_Ind" Type="char" MaxLength="1" />
           <Property Name="Photo_Code" Type="varchar" MaxLength="255" />
+          <Property Name="Involved_Org_Cnt" Type="int" />
         </EntityType>
         <EntityType Name="tblEvent_Roster">
           <Key>
@@ -175,6 +244,7 @@ warning 6002: The table/view 'misspiggyDB.dbo.LU_tblPgmRelationType' does not ha
           <Property Name="Contact_Hours" Type="decimal" Precision="5" Scale="2" />
           <Property Name="Create_Datetime" Type="datetime" />
           <Property Name="Modified_Datetime" Type="datetime" />
+          <Property Name="Contact_Event_Role" Type="int" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
@@ -405,14 +475,14 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="modify_date" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblContac__Conta__267ABA7A">
+        <Association Name="FK__tblContac__Conta__719CDDE7">
           <End Role="LU_tblContactType" Type="Self.LU_tblContactType" Multiplicity="0..1" />
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblContactType">
               <PropertyRef Name="Type_Id" />
             </Principal>
-            <Dependent Role="tblContact_Person">
+            <Dependent Role="tblContact_Person_Types">
               <PropertyRef Name="Contact_Type_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -426,6 +496,54 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             </Principal>
             <Dependent Role="tblContact_Person">
               <PropertyRef Name="Org_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Perso__70A8B9AE">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Person_Types" Type="Self.tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__7C1A6C5A">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__7D0E9093">
+          <End Role="LU_tblPgmRelationType" Type="Self.LU_tblPgmRelationType" Multiplicity="1" />
+          <End Role="tblContact_PgmRelation_Types" Type="Self.tblContact_PgmRelation_Types" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblPgmRelationType">
+              <PropertyRef Name="Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEvent___Conta__02C769E9">
+          <End Role="LU_tblEvent_Role" Type="Self.LU_tblEvent_Role" Multiplicity="0..1" />
+          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEvent_Role">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Event_Role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -522,6 +640,18 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             </Principal>
             <Dependent Role="tblEvent_Info">
               <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_Person">
+          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
+          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Org">
+              <PropertyRef Name="Primary_Contact" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -705,10 +835,14 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <EntitySet Name="BuildVersion" EntityType="Self.BuildVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LU_tblContactType" EntityType="Self.LU_tblContactType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblEvent_Role" EntityType="Self.LU_tblEvent_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LU_tblEventStatus" EntityType="Self.LU_tblEventStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LU_tblEventType" EntityType="Self.LU_tblEventType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContact_Org" EntityType="Self.tblContact_Org" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblContact_Person" EntityType="Self.tblContact_Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_Person_Types" EntityType="Self.tblContact_Person_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="Self.tblContact_PgmRelation_Types" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDonation_Info" EntityType="Self.tblDonation_Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvent_Info" EntityType="Self.tblEvent_Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvent_Roster" EntityType="Self.tblEvent_Roster" Schema="dbo" store:Type="Tables" />
@@ -722,12 +856,6 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <EntitySet Name="ProductModelProductDescription" EntityType="Self.ProductModelProductDescription" Schema="SalesLT" store:Type="Tables" />
           <EntitySet Name="SalesOrderDetail" EntityType="Self.SalesOrderDetail" Schema="SalesLT" store:Type="Tables" />
           <EntitySet Name="SalesOrderHeader" EntityType="Self.SalesOrderHeader" Schema="SalesLT" store:Type="Tables" />
-          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [LU_tblPgmRelationType].[Type_Id] AS [Type_Id], 
-    [LU_tblPgmRelationType].[Type_Desc] AS [Type_Desc]
-    FROM [dbo].[LU_tblPgmRelationType] AS [LU_tblPgmRelationType]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vGetAllCategories" EntityType="Self.vGetAllCategories" store:Type="Views" store:Schema="SalesLT">
             <DefiningQuery>SELECT 
     [vGetAllCategories].[ParentProductCategoryName] AS [ParentProductCategoryName], 
@@ -783,13 +911,29 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
     [database_firewall_rules].[modify_date] AS [modify_date]
     FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblContac__Conta__267ABA7A" Association="Self.FK__tblContac__Conta__267ABA7A">
+          <AssociationSet Name="FK__tblContac__Conta__719CDDE7" Association="Self.FK__tblContac__Conta__719CDDE7">
             <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
           </AssociationSet>
           <AssociationSet Name="FK__tblContac__Org_I__56E8E7AB" Association="Self.FK__tblContac__Org_I__56E8E7AB">
             <End Role="tblContact_Org" EntitySet="tblContact_Org" />
             <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__70A8B9AE" Association="Self.FK__tblContac__Perso__70A8B9AE">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__7C1A6C5A" Association="Self.FK__tblContac__PgmRe__7C1A6C5A">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__7D0E9093" Association="Self.FK__tblContac__PgmRe__7D0E9093">
+            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__02C769E9" Association="Self.FK__tblEvent___Conta__02C769E9">
+            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
           </AssociationSet>
           <AssociationSet Name="FK__tblEvent___Conta__3F466844" Association="Self.FK__tblEvent___Conta__3F466844">
             <End Role="tblContact_Person" EntitySet="tblContact_Person" />
@@ -822,6 +966,10 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <AssociationSet Name="FK__tblEvent___Statu__49C3F6B7" Association="Self.FK__tblEvent___Statu__49C3F6B7">
             <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
             <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Person" Association="Self.FK_Contact_Person">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerAddress_Address_AddressID" Association="Self.FK_CustomerAddress_Address_AddressID">
             <End Role="Address" EntitySet="Address" />
@@ -872,8 +1020,7 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             <End Role="SalesOrderHeader" EntitySet="SalesOrderHeader" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="misspiggyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -887,12 +1034,158 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </ComplexType>
+        <EntityContainer Name="misspiggyDBEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="ufnGetAllCategories" IsComposable="true" ReturnType="Collection(misspiggyDBModel.ufnGetAllCategories_Result)" />
+          <FunctionImport Name="ufnGetCustomerInformation" IsComposable="true" ReturnType="Collection(misspiggyDBModel.ufnGetCustomerInformation_Result)">
+          <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspLogError">
+          <Parameter Name="ErrorLogID" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspPrintError" />
+          <EntitySet Name="BuildVersions" EntityType="misspiggyDBModel.BuildVersion" />
+          <EntitySet Name="ErrorLogs" EntityType="misspiggyDBModel.ErrorLog" />
+          <EntitySet Name="LU_tblContactType" EntityType="misspiggyDBModel.LU_tblContactType" />
+          <EntitySet Name="LU_tblEvent_Role" EntityType="misspiggyDBModel.LU_tblEvent_Role" />
+          <EntitySet Name="LU_tblEventStatus" EntityType="misspiggyDBModel.LU_tblEventStatus" />
+          <EntitySet Name="LU_tblEventType" EntityType="misspiggyDBModel.LU_tblEventType" />
+          <EntitySet Name="LU_tblPgmRelationType" EntityType="misspiggyDBModel.LU_tblPgmRelationType" />
+          <EntitySet Name="tblContact_Org" EntityType="misspiggyDBModel.tblContact_Org" />
+          <EntitySet Name="tblContact_Person" EntityType="misspiggyDBModel.tblContact_Person" />
+          <EntitySet Name="tblContact_Person_Types" EntityType="misspiggyDBModel.tblContact_Person_Types" />
+          <EntitySet Name="tblContact_PgmRelation_Types" EntityType="misspiggyDBModel.tblContact_PgmRelation_Types" />
+          <EntitySet Name="tblDonation_Info" EntityType="misspiggyDBModel.tblDonation_Info" />
+          <EntitySet Name="tblEvent_Info" EntityType="misspiggyDBModel.tblEvent_Info" />
+          <EntitySet Name="tblEvent_Roster" EntityType="misspiggyDBModel.tblEvent_Roster" />
+          <EntitySet Name="Addresses" EntityType="misspiggyDBModel.Address" />
+          <EntitySet Name="Customers" EntityType="misspiggyDBModel.Customer" />
+          <EntitySet Name="CustomerAddresses" EntityType="misspiggyDBModel.CustomerAddress" />
+          <EntitySet Name="Products" EntityType="misspiggyDBModel.Product" />
+          <EntitySet Name="ProductCategories" EntityType="misspiggyDBModel.ProductCategory" />
+          <EntitySet Name="ProductDescriptions" EntityType="misspiggyDBModel.ProductDescription" />
+          <EntitySet Name="ProductModels" EntityType="misspiggyDBModel.ProductModel" />
+          <EntitySet Name="ProductModelProductDescriptions" EntityType="misspiggyDBModel.ProductModelProductDescription" />
+          <EntitySet Name="SalesOrderDetails" EntityType="misspiggyDBModel.SalesOrderDetail" />
+          <EntitySet Name="SalesOrderHeaders" EntityType="misspiggyDBModel.SalesOrderHeader" />
+          <EntitySet Name="vGetAllCategories" EntityType="misspiggyDBModel.vGetAllCategory" />
+          <EntitySet Name="vProductAndDescriptions" EntityType="misspiggyDBModel.vProductAndDescription" />
+          <EntitySet Name="vProductModelCatalogDescriptions" EntityType="misspiggyDBModel.vProductModelCatalogDescription" />
+          <EntitySet Name="database_firewall_rules" EntityType="misspiggyDBModel.database_firewall_rules" />
+          <AssociationSet Name="FK__tblContac__Conta__719CDDE7" Association="misspiggyDBModel.FK__tblContac__Conta__719CDDE7">
+            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__02C769E9" Association="misspiggyDBModel.FK__tblEvent___Conta__02C769E9">
+            <End Role="LU_tblEvent_Role" EntitySet="LU_tblEvent_Role" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Statu__2E1BDC42" Association="misspiggyDBModel.FK__tblEvent___Statu__2E1BDC42">
+            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Statu__49C3F6B7" Association="misspiggyDBModel.FK__tblEvent___Statu__49C3F6B7">
+            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__2D27B809" Association="misspiggyDBModel.FK__tblEvent___Event__2D27B809">
+            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__47DBAE45" Association="misspiggyDBModel.FK__tblEvent___Event__47DBAE45">
+            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__7D0E9093" Association="misspiggyDBModel.FK__tblContac__PgmRe__7D0E9093">
+            <End Role="LU_tblPgmRelationType" EntitySet="LU_tblPgmRelationType" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Org_I__56E8E7AB" Association="misspiggyDBModel.FK__tblContac__Org_I__56E8E7AB">
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_Person" Association="misspiggyDBModel.FK_Contact_Person">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__Perso__70A8B9AE" Association="misspiggyDBModel.FK__tblContac__Perso__70A8B9AE">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_Person_Types" EntitySet="tblContact_Person_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblContac__PgmRe__7C1A6C5A" Association="misspiggyDBModel.FK__tblContac__PgmRe__7C1A6C5A">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblContact_PgmRelation_Types" EntitySet="tblContact_PgmRelation_Types" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Conta__3F466844" Association="misspiggyDBModel.FK__tblEvent___Conta__3F466844">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Prima__2F10007B" Association="misspiggyDBModel.FK__tblEvent___Prima__2F10007B">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Prima__48CFD27E" Association="misspiggyDBModel.FK__tblEvent___Prima__48CFD27E">
+            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEvent___Event__3E52440B" Association="misspiggyDBModel.FK__tblEvent___Event__3E52440B">
+            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
+            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_Address_AddressID" Association="misspiggyDBModel.FK_CustomerAddress_Address_AddressID">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesOrderHeader_Address_BillTo_AddressID" Association="misspiggyDBModel.FK_SalesOrderHeader_Address_BillTo_AddressID">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesOrderHeader_Address_ShipTo_AddressID" Association="misspiggyDBModel.FK_SalesOrderHeader_Address_ShipTo_AddressID">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAddress_Customer_CustomerID" Association="misspiggyDBModel.FK_CustomerAddress_Customer_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesOrderHeader_Customer_CustomerID" Association="misspiggyDBModel.FK_SalesOrderHeader_Customer_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory_ProductCategoryID" Association="misspiggyDBModel.FK_Product_ProductCategory_ProductCategoryID">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductModel_ProductModelID" Association="misspiggyDBModel.FK_Product_ProductModel_ProductModelID">
+            <End Role="ProductModel" EntitySet="ProductModels" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesOrderDetail_Product_ProductID" Association="misspiggyDBModel.FK_SalesOrderDetail_Product_ProductID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" Association="misspiggyDBModel.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductCategory1" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" Association="misspiggyDBModel.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID">
+            <End Role="ProductDescription" EntitySet="ProductDescriptions" />
+            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductModelProductDescription_ProductModel_ProductModelID" Association="misspiggyDBModel.FK_ProductModelProductDescription_ProductModel_ProductModelID">
+            <End Role="ProductModel" EntitySet="ProductModels" />
+            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" Association="misspiggyDBModel.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID">
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
+            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="BuildVersion">
           <Key>
             <PropertyRef Name="SystemInformationID" />
           </Key>
           <Property Name="SystemInformationID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Database_Version" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Database_Version" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="VersionDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
@@ -902,50 +1195,63 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ErrorTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
           <Property Name="ErrorSeverity" Type="Int32" />
           <Property Name="ErrorState" Type="Int32" />
           <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
           <Property Name="ErrorLine" Type="Int32" />
-          <Property Name="ErrorMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ErrorMessage" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LU_tblContactType">
           <Key>
             <PropertyRef Name="Type_Id" />
           </Key>
           <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Conta__267ABA7A" FromRole="LU_tblContactType" ToRole="tblContact_Person" />
+          <Property Name="Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="misspiggyDBModel.FK__tblContac__Conta__719CDDE7" FromRole="LU_tblContactType" ToRole="tblContact_Person_Types" />
+        </EntityType>
+        <EntityType Name="LU_tblEvent_Role">
+          <Key>
+            <PropertyRef Name="Role_Id" />
+          </Key>
+          <Property Name="Role_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="misspiggyDBModel.FK__tblEvent___Conta__02C769E9" FromRole="LU_tblEvent_Role" ToRole="tblEvent_Roster" />
         </EntityType>
         <EntityType Name="LU_tblEventStatus">
           <Key>
             <PropertyRef Name="Status_Id" />
           </Key>
           <Property Name="Status_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Statu__2E1BDC42" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
-          <NavigationProperty Name="tblEvent_Info1" Relationship="Self.FK__tblEvent___Statu__49C3F6B7" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
+          <Property Name="Status_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="misspiggyDBModel.FK__tblEvent___Statu__2E1BDC42" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
+          <NavigationProperty Name="tblEvent_Info1" Relationship="misspiggyDBModel.FK__tblEvent___Statu__49C3F6B7" FromRole="LU_tblEventStatus" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="LU_tblEventType">
           <Key>
             <PropertyRef Name="Type_Id" />
           </Key>
           <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Category_ID" Type="Int32" />
-          <Property Name="Category_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Sub_Category_ID" Type="Int32" />
-          <Property Name="Sub_Category_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__2D27B809" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
-          <NavigationProperty Name="tblEvent_Info1" Relationship="Self.FK__tblEvent___Event__47DBAE45" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
+          <Property Name="Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="misspiggyDBModel.FK__tblEvent___Event__2D27B809" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
+          <NavigationProperty Name="tblEvent_Info1" Relationship="misspiggyDBModel.FK__tblEvent___Event__47DBAE45" FromRole="LU_tblEventType" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="LU_tblPgmRelationType">
+          <Key>
+            <PropertyRef Name="Type_Id" />
+          </Key>
+          <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="misspiggyDBModel.FK__tblContac__PgmRe__7D0E9093" FromRole="LU_tblPgmRelationType" ToRole="tblContact_PgmRelation_Types" />
         </EntityType>
         <EntityType Name="tblContact_Org">
           <Key>
             <PropertyRef Name="Org_Id" />
           </Key>
           <Property Name="Org_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Org_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Org_Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Id" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Primary_Contact" Type="Int64" />
           <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -955,19 +1261,22 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Phone_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblContac__Org_I__56E8E7AB" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_Person" Relationship="misspiggyDBModel.FK__tblContac__Org_I__56E8E7AB" FromRole="tblContact_Org" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblContact_Person1" Relationship="misspiggyDBModel.FK_Contact_Person" FromRole="tblContact_Org" ToRole="tblContact_Person" />
         </EntityType>
         <EntityType Name="tblContact_Person">
           <Key>
             <PropertyRef Name="Contact_Id" />
           </Key>
           <Property Name="Contact_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Contact_Type_Id" Type="Int32" />
-          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name_Prefix" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Email_Id" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email_Id" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Addr_Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -982,20 +1291,49 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Org_Id" Type="Int64" />
-          <NavigationProperty Name="LU_tblContactType" Relationship="Self.FK__tblContac__Conta__267ABA7A" FromRole="tblContact_Person" ToRole="LU_tblContactType" />
-          <NavigationProperty Name="tblContact_Org" Relationship="Self.FK__tblContac__Org_I__56E8E7AB" FromRole="tblContact_Person" ToRole="tblContact_Org" />
-          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Conta__3F466844" FromRole="tblContact_Person" ToRole="tblEvent_Roster" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Prima__2F10007B" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
-          <NavigationProperty Name="tblEvent_Info1" Relationship="Self.FK__tblEvent___Prima__48CFD27E" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
+          <Property Name="Kindful_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalesForce_Contact_Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Addr_Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblContact_Org" Relationship="misspiggyDBModel.FK__tblContac__Org_I__56E8E7AB" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Org1" Relationship="misspiggyDBModel.FK_Contact_Person" FromRole="tblContact_Person" ToRole="tblContact_Org" />
+          <NavigationProperty Name="tblContact_Person_Types" Relationship="misspiggyDBModel.FK__tblContac__Perso__70A8B9AE" FromRole="tblContact_Person" ToRole="tblContact_Person_Types" />
+          <NavigationProperty Name="tblContact_PgmRelation_Types" Relationship="misspiggyDBModel.FK__tblContac__PgmRe__7C1A6C5A" FromRole="tblContact_Person" ToRole="tblContact_PgmRelation_Types" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="misspiggyDBModel.FK__tblEvent___Conta__3F466844" FromRole="tblContact_Person" ToRole="tblEvent_Roster" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="misspiggyDBModel.FK__tblEvent___Prima__2F10007B" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
+          <NavigationProperty Name="tblEvent_Info1" Relationship="misspiggyDBModel.FK__tblEvent___Prima__48CFD27E" FromRole="tblContact_Person" ToRole="tblEvent_Info" />
+        </EntityType>
+        <EntityType Name="tblContact_Person_Types">
+          <Key>
+            <PropertyRef Name="Person_Type_Id" />
+          </Key>
+          <Property Name="Person_Type_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Person_Contact_Id" Type="Int64" />
+          <Property Name="Contact_Type_Id" Type="Int32" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LU_tblContactType" Relationship="misspiggyDBModel.FK__tblContac__Conta__719CDDE7" FromRole="tblContact_Person_Types" ToRole="LU_tblContactType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="misspiggyDBModel.FK__tblContac__Perso__70A8B9AE" FromRole="tblContact_Person_Types" ToRole="tblContact_Person" />
+        </EntityType>
+        <EntityType Name="tblContact_PgmRelation_Types">
+          <Key>
+            <PropertyRef Name="PgmRelation_Type_Id" />
+          </Key>
+          <Property Name="PgmRelation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PgmRelation_Contact_Id" Type="Int64" />
+          <Property Name="PgmRelation_Type_Id" Type="Int32" Nullable="false" />
+          <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LU_tblPgmRelationType" Relationship="misspiggyDBModel.FK__tblContac__PgmRe__7D0E9093" FromRole="tblContact_PgmRelation_Types" ToRole="LU_tblPgmRelationType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="misspiggyDBModel.FK__tblContac__PgmRe__7C1A6C5A" FromRole="tblContact_PgmRelation_Types" ToRole="tblContact_Person" />
         </EntityType>
         <EntityType Name="tblDonation_Info">
           <Key>
             <PropertyRef Name="Donation_Id" />
           </Key>
           <Property Name="Donation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Donor_First_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Donor_First_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Donor_Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Donor_Contact_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Is_Donor_Org_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -1008,14 +1346,9 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Tran_Date" Type="DateTime" Precision="0" />
           <Property Name="Tran_Check_Num" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Tran_Card_Last4" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="Addr_Street1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Addr_Street2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Addr_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Addr_State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Addr_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Load_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
+          <Property Name="Donor_Contact_Id" Type="Int64" />
         </EntityType>
         <EntityType Name="tblEvent_Info">
           <Key>
@@ -1023,12 +1356,12 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="Event_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Event_Type_Id" Type="Int32" />
-          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Event_Date" Type="DateTime" Precision="0" />
           <Property Name="Planned_Start" Type="DateTime" Precision="3" />
           <Property Name="Planned_End" Type="DateTime" Precision="3" />
-          <Property Name="Event_Duration" Type="Int32" />
+          <Property Name="Event_Duration" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="Location_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="GPS_Location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Primary_Contact" Type="Int64" />
@@ -1038,7 +1371,7 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Addr_ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <Property Name="Active_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Active_Ind" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Adult_Cnt" Type="Int64" />
           <Property Name="Child_Cnt" Type="Int64" />
           <Property Name="Mileage" Type="Decimal" Precision="7" Scale="2" />
@@ -1047,13 +1380,14 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Photo_Release_Ind" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Photo_Code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="LU_tblEventStatus" Relationship="Self.FK__tblEvent___Statu__2E1BDC42" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
-          <NavigationProperty Name="LU_tblEventStatus1" Relationship="Self.FK__tblEvent___Statu__49C3F6B7" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
-          <NavigationProperty Name="LU_tblEventType" Relationship="Self.FK__tblEvent___Event__2D27B809" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
-          <NavigationProperty Name="LU_tblEventType1" Relationship="Self.FK__tblEvent___Event__47DBAE45" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Prima__2F10007B" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblContact_Person1" Relationship="Self.FK__tblEvent___Prima__48CFD27E" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblEvent_Roster" Relationship="Self.FK__tblEvent___Event__3E52440B" FromRole="tblEvent_Info" ToRole="tblEvent_Roster" />
+          <Property Name="Involved_Org_Cnt" Type="Int32" />
+          <NavigationProperty Name="LU_tblEventStatus" Relationship="misspiggyDBModel.FK__tblEvent___Statu__2E1BDC42" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
+          <NavigationProperty Name="LU_tblEventStatus1" Relationship="misspiggyDBModel.FK__tblEvent___Statu__49C3F6B7" FromRole="tblEvent_Info" ToRole="LU_tblEventStatus" />
+          <NavigationProperty Name="LU_tblEventType" Relationship="misspiggyDBModel.FK__tblEvent___Event__2D27B809" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
+          <NavigationProperty Name="LU_tblEventType1" Relationship="misspiggyDBModel.FK__tblEvent___Event__47DBAE45" FromRole="tblEvent_Info" ToRole="LU_tblEventType" />
+          <NavigationProperty Name="tblContact_Person" Relationship="misspiggyDBModel.FK__tblEvent___Prima__2F10007B" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblContact_Person1" Relationship="misspiggyDBModel.FK__tblEvent___Prima__48CFD27E" FromRole="tblEvent_Info" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Roster" Relationship="misspiggyDBModel.FK__tblEvent___Event__3E52440B" FromRole="tblEvent_Info" ToRole="tblEvent_Roster" />
         </EntityType>
         <EntityType Name="tblEvent_Roster">
           <Key>
@@ -1065,25 +1399,27 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="Contact_Hours" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="Create_Datetime" Type="DateTime" Precision="3" />
           <Property Name="Modified_Datetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblContact_Person" Relationship="Self.FK__tblEvent___Conta__3F466844" FromRole="tblEvent_Roster" ToRole="tblContact_Person" />
-          <NavigationProperty Name="tblEvent_Info" Relationship="Self.FK__tblEvent___Event__3E52440B" FromRole="tblEvent_Roster" ToRole="tblEvent_Info" />
+          <Property Name="Contact_Event_Role" Type="Int32" />
+          <NavigationProperty Name="LU_tblEvent_Role" Relationship="misspiggyDBModel.FK__tblEvent___Conta__02C769E9" FromRole="tblEvent_Roster" ToRole="LU_tblEvent_Role" />
+          <NavigationProperty Name="tblContact_Person" Relationship="misspiggyDBModel.FK__tblEvent___Conta__3F466844" FromRole="tblEvent_Roster" ToRole="tblContact_Person" />
+          <NavigationProperty Name="tblEvent_Info" Relationship="misspiggyDBModel.FK__tblEvent___Event__3E52440B" FromRole="tblEvent_Roster" ToRole="tblEvent_Info" />
         </EntityType>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
           </Key>
           <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AddressLine1" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="AddressLine2" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="StateProvince" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CountryRegion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StateProvince" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryRegion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CustomerAddresses" Relationship="Self.FK_CustomerAddress_Address_AddressID" FromRole="Address" ToRole="CustomerAddress" />
-          <NavigationProperty Name="SalesOrderHeaders" Relationship="Self.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
-          <NavigationProperty Name="SalesOrderHeaders1" Relationship="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="CustomerAddresses" Relationship="misspiggyDBModel.FK_CustomerAddress_Address_AddressID" FromRole="Address" ToRole="CustomerAddress" />
+          <NavigationProperty Name="SalesOrderHeaders" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="SalesOrderHeaders1" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -1092,20 +1428,20 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameStyle" Type="Boolean" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Suffix" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SalesPerson" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PasswordSalt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CustomerAddresses" Relationship="Self.FK_CustomerAddress_Customer_CustomerID" FromRole="Customer" ToRole="CustomerAddress" />
-          <NavigationProperty Name="SalesOrderHeaders" Relationship="Self.FK_SalesOrderHeader_Customer_CustomerID" FromRole="Customer" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="CustomerAddresses" Relationship="misspiggyDBModel.FK_CustomerAddress_Customer_CustomerID" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="SalesOrderHeaders" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Customer_CustomerID" FromRole="Customer" ToRole="SalesOrderHeader" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -1114,22 +1450,22 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="AddressID" Type="Int32" Nullable="false" />
-          <Property Name="AddressType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_CustomerAddress_Address_AddressID" FromRole="CustomerAddress" ToRole="Address" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_CustomerAddress_Customer_CustomerID" FromRole="CustomerAddress" ToRole="Customer" />
+          <NavigationProperty Name="Address" Relationship="misspiggyDBModel.FK_CustomerAddress_Address_AddressID" FromRole="CustomerAddress" ToRole="Address" />
+          <NavigationProperty Name="Customer" Relationship="misspiggyDBModel.FK_CustomerAddress_Customer_CustomerID" FromRole="CustomerAddress" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Color" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="StandardCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="ListPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="StandardCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ListPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Size" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="Weight" Type="Decimal" Precision="8" Scale="2" />
           <Property Name="ProductCategoryID" Type="Int32" />
@@ -1141,9 +1477,9 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="ThumbnailPhotoFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Product_ProductCategory_ProductCategoryID" FromRole="Product" ToRole="ProductCategory" />
-          <NavigationProperty Name="ProductModel" Relationship="Self.FK_Product_ProductModel_ProductModelID" FromRole="Product" ToRole="ProductModel" />
-          <NavigationProperty Name="SalesOrderDetails" Relationship="Self.FK_SalesOrderDetail_Product_ProductID" FromRole="Product" ToRole="SalesOrderDetail" />
+          <NavigationProperty Name="ProductCategory" Relationship="misspiggyDBModel.FK_Product_ProductCategory_ProductCategoryID" FromRole="Product" ToRole="ProductCategory" />
+          <NavigationProperty Name="ProductModel" Relationship="misspiggyDBModel.FK_Product_ProductModel_ProductModelID" FromRole="Product" ToRole="ProductModel" />
+          <NavigationProperty Name="SalesOrderDetails" Relationship="misspiggyDBModel.FK_SalesOrderDetail_Product_ProductID" FromRole="Product" ToRole="SalesOrderDetail" />
         </EntityType>
         <EntityType Name="ProductCategory">
           <Key>
@@ -1151,34 +1487,34 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="ProductCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ParentProductCategoryID" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductCategory_ProductCategoryID" FromRole="ProductCategory" ToRole="Product" />
-          <NavigationProperty Name="ProductCategory1" Relationship="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory" ToRole="ProductCategory1" />
-          <NavigationProperty Name="ProductCategory2" Relationship="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory1" ToRole="ProductCategory" />
+          <NavigationProperty Name="Products" Relationship="misspiggyDBModel.FK_Product_ProductCategory_ProductCategoryID" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="ProductCategory1" Relationship="misspiggyDBModel.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory" ToRole="ProductCategory1" />
+          <NavigationProperty Name="ProductCategory2" Relationship="misspiggyDBModel.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory1" ToRole="ProductCategory" />
         </EntityType>
         <EntityType Name="ProductDescription">
           <Key>
             <PropertyRef Name="ProductDescriptionID" />
           </Key>
           <Property Name="ProductDescriptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductDescription" ToRole="ProductModelProductDescription" />
+          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="misspiggyDBModel.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductDescription" ToRole="ProductModelProductDescription" />
         </EntityType>
         <EntityType Name="ProductModel">
           <Key>
             <PropertyRef Name="ProductModelID" />
           </Key>
           <Property Name="ProductModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CatalogDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="Product" />
-          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="ProductModelProductDescription" />
+          <NavigationProperty Name="Products" Relationship="misspiggyDBModel.FK_Product_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="Product" />
+          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="misspiggyDBModel.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="ProductModelProductDescription" />
         </EntityType>
         <EntityType Name="ProductModelProductDescription">
           <Key>
@@ -1188,11 +1524,11 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </Key>
           <Property Name="ProductModelID" Type="Int32" Nullable="false" />
           <Property Name="ProductDescriptionID" Type="Int32" Nullable="false" />
-          <Property Name="Culture" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ProductDescription" Relationship="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductModelProductDescription" ToRole="ProductDescription" />
-          <NavigationProperty Name="ProductModel" Relationship="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModelProductDescription" ToRole="ProductModel" />
+          <NavigationProperty Name="ProductDescription" Relationship="misspiggyDBModel.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductModelProductDescription" ToRole="ProductDescription" />
+          <NavigationProperty Name="ProductModel" Relationship="misspiggyDBModel.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModelProductDescription" ToRole="ProductModel" />
         </EntityType>
         <EntityType Name="SalesOrderDetail">
           <Key>
@@ -1203,13 +1539,13 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="SalesOrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderQty" Type="Int16" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="UnitPriceDiscount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="LineTotal" Type="Decimal" Precision="38" Scale="6" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="UnitPriceDiscount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="LineTotal" Type="Decimal" Nullable="false" Precision="38" Scale="6" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_SalesOrderDetail_Product_ProductID" FromRole="SalesOrderDetail" ToRole="Product" />
-          <NavigationProperty Name="SalesOrderHeader" Relationship="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderDetail" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="Product" Relationship="misspiggyDBModel.FK_SalesOrderDetail_Product_ProductID" FromRole="SalesOrderDetail" ToRole="Product" />
+          <NavigationProperty Name="SalesOrderHeader" Relationship="misspiggyDBModel.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderDetail" ToRole="SalesOrderHeader" />
         </EntityType>
         <EntityType Name="SalesOrderHeader">
           <Key>
@@ -1222,39 +1558,31 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           <Property Name="ShipDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="OnlineOrderFlag" Type="Boolean" Nullable="false" />
-          <Property Name="SalesOrderNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SalesOrderNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="PurchaseOrderNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="AccountNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="ShipToAddressID" Type="Int32" />
           <Property Name="BillToAddressID" Type="Int32" />
-          <Property Name="ShipMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipMethod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardApprovalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="SubTotal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="TaxAmt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="Freight" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="TotalDue" Type="Decimal" Precision="19" Scale="4" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TaxAmt" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Freight" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TotalDue" Type="Decimal" Nullable="false" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
-          <NavigationProperty Name="Address1" Relationship="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_SalesOrderHeader_Customer_CustomerID" FromRole="SalesOrderHeader" ToRole="Customer" />
-          <NavigationProperty Name="SalesOrderDetails" Relationship="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderHeader" ToRole="SalesOrderDetail" />
-        </EntityType>
-        <EntityType Name="LU_tblPgmRelationType">
-          <Key>
-            <PropertyRef Name="Type_Id" />
-            <PropertyRef Name="Type_Desc" />
-          </Key>
-          <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Type_Desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
+          <NavigationProperty Name="Address1" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
+          <NavigationProperty Name="Customer" Relationship="misspiggyDBModel.FK_SalesOrderHeader_Customer_CustomerID" FromRole="SalesOrderHeader" ToRole="Customer" />
+          <NavigationProperty Name="SalesOrderDetails" Relationship="misspiggyDBModel.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderHeader" ToRole="SalesOrderDetail" />
         </EntityType>
         <EntityType Name="vGetAllCategory">
           <Key>
             <PropertyRef Name="ParentProductCategoryName" />
           </Key>
-          <Property Name="ParentProductCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentProductCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductCategoryID" Type="Int32" />
         </EntityType>
@@ -1267,10 +1595,10 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             <PropertyRef Name="Description" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProductModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Culture" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="vProductModelCatalogDescription">
           <Key>
@@ -1280,7 +1608,7 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             <PropertyRef Name="ModifiedDate" />
           </Key>
           <Property Name="ProductModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Manufacturer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Copyright" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -1315,27 +1643,39 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             <PropertyRef Name="modify_date" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <Association Name="FK__tblContac__Conta__267ABA7A">
-          <End Role="LU_tblContactType" Type="Self.LU_tblContactType" Multiplicity="0..1" />
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+        <Association Name="FK__tblContac__Conta__719CDDE7">
+          <End Type="misspiggyDBModel.LU_tblContactType" Role="LU_tblContactType" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblContact_Person_Types" Role="tblContact_Person_Types" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblContactType">
               <PropertyRef Name="Type_Id" />
             </Principal>
-            <Dependent Role="tblContact_Person">
+            <Dependent Role="tblContact_Person_Types">
               <PropertyRef Name="Contact_Type_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tblEvent___Conta__02C769E9">
+          <End Type="misspiggyDBModel.LU_tblEvent_Role" Role="LU_tblEvent_Role" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblEvent_Role">
+              <PropertyRef Name="Role_Id" />
+            </Principal>
+            <Dependent Role="tblEvent_Roster">
+              <PropertyRef Name="Contact_Event_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tblEvent___Statu__2E1BDC42">
-          <End Role="LU_tblEventStatus" Type="Self.LU_tblEventStatus" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.LU_tblEventStatus" Role="LU_tblEventStatus" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventStatus">
               <PropertyRef Name="Status_Id" />
@@ -1346,8 +1686,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Statu__49C3F6B7">
-          <End Role="LU_tblEventStatus" Type="Self.LU_tblEventStatus" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.LU_tblEventStatus" Role="LU_tblEventStatus" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventStatus">
               <PropertyRef Name="Status_Id" />
@@ -1358,8 +1698,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Event__2D27B809">
-          <End Role="LU_tblEventType" Type="Self.LU_tblEventType" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.LU_tblEventType" Role="LU_tblEventType" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventType">
               <PropertyRef Name="Type_Id" />
@@ -1370,8 +1710,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Event__47DBAE45">
-          <End Role="LU_tblEventType" Type="Self.LU_tblEventType" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.LU_tblEventType" Role="LU_tblEventType" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LU_tblEventType">
               <PropertyRef Name="Type_Id" />
@@ -1381,9 +1721,21 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__tblContac__PgmRe__7D0E9093">
+          <End Type="misspiggyDBModel.LU_tblPgmRelationType" Role="LU_tblPgmRelationType" Multiplicity="1" />
+          <End Type="misspiggyDBModel.tblContact_PgmRelation_Types" Role="tblContact_PgmRelation_Types" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LU_tblPgmRelationType">
+              <PropertyRef Name="Type_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Type_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tblContac__Org_I__56E8E7AB">
-          <End Role="tblContact_Org" Type="Self.tblContact_Org" Multiplicity="0..1" />
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="*" />
+          <End Type="misspiggyDBModel.tblContact_Org" Role="tblContact_Org" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Org">
               <PropertyRef Name="Org_Id" />
@@ -1393,9 +1745,45 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contact_Person">
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblContact_Org" Role="tblContact_Org" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Org">
+              <PropertyRef Name="Primary_Contact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__Perso__70A8B9AE">
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblContact_Person_Types" Role="tblContact_Person_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_Person_Types">
+              <PropertyRef Name="Person_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblContac__PgmRe__7C1A6C5A">
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblContact_PgmRelation_Types" Role="tblContact_PgmRelation_Types" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblContact_Person">
+              <PropertyRef Name="Contact_Id" />
+            </Principal>
+            <Dependent Role="tblContact_PgmRelation_Types">
+              <PropertyRef Name="PgmRelation_Contact_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__tblEvent___Conta__3F466844">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Contact_Id" />
@@ -1406,8 +1794,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Prima__2F10007B">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Contact_Id" />
@@ -1418,8 +1806,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Prima__48CFD27E">
-          <End Role="tblContact_Person" Type="Self.tblContact_Person" Multiplicity="0..1" />
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="*" />
+          <End Type="misspiggyDBModel.tblContact_Person" Role="tblContact_Person" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblContact_Person">
               <PropertyRef Name="Contact_Id" />
@@ -1430,8 +1818,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__tblEvent___Event__3E52440B">
-          <End Role="tblEvent_Info" Type="Self.tblEvent_Info" Multiplicity="0..1" />
-          <End Role="tblEvent_Roster" Type="Self.tblEvent_Roster" Multiplicity="*" />
+          <End Type="misspiggyDBModel.tblEvent_Info" Role="tblEvent_Info" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.tblEvent_Roster" Role="tblEvent_Roster" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblEvent_Info">
               <PropertyRef Name="Event_Id" />
@@ -1442,8 +1830,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerAddress_Address_AddressID">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="misspiggyDBModel.CustomerAddress" Role="CustomerAddress" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="AddressID" />
@@ -1454,8 +1842,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SalesOrderHeader_Address_BillTo_AddressID">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="SalesOrderHeader" Type="Self.SalesOrderHeader" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.SalesOrderHeader" Role="SalesOrderHeader" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="AddressID" />
@@ -1466,8 +1854,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SalesOrderHeader_Address_ShipTo_AddressID">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="SalesOrderHeader" Type="Self.SalesOrderHeader" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Address" Role="Address" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.SalesOrderHeader" Role="SalesOrderHeader" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
               <PropertyRef Name="AddressID" />
@@ -1478,8 +1866,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CustomerAddress_Customer_CustomerID">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="CustomerAddress" Type="Self.CustomerAddress" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="misspiggyDBModel.CustomerAddress" Role="CustomerAddress" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="CustomerID" />
@@ -1490,8 +1878,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SalesOrderHeader_Customer_CustomerID">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="SalesOrderHeader" Type="Self.SalesOrderHeader" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="misspiggyDBModel.SalesOrderHeader" Role="SalesOrderHeader" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
               <PropertyRef Name="CustomerID" />
@@ -1502,8 +1890,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_ProductCategory_ProductCategoryID">
-          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="misspiggyDBModel.ProductCategory" Role="ProductCategory" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductCategory">
               <PropertyRef Name="ProductCategoryID" />
@@ -1514,8 +1902,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_ProductModel_ProductModelID">
-          <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="0..1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="misspiggyDBModel.ProductModel" Role="ProductModel" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductModel">
               <PropertyRef Name="ProductModelID" />
@@ -1526,8 +1914,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SalesOrderDetail_Product_ProductID">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="SalesOrderDetail" Type="Self.SalesOrderDetail" Multiplicity="*" />
+          <End Type="misspiggyDBModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="misspiggyDBModel.SalesOrderDetail" Role="SalesOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="ProductID" />
@@ -1538,8 +1926,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID">
-          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
-          <End Role="ProductCategory1" Type="Self.ProductCategory" Multiplicity="*" />
+          <End Type="misspiggyDBModel.ProductCategory" Role="ProductCategory" Multiplicity="0..1" />
+          <End Type="misspiggyDBModel.ProductCategory" Role="ProductCategory1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductCategory">
               <PropertyRef Name="ProductCategoryID" />
@@ -1550,8 +1938,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID">
-          <End Role="ProductDescription" Type="Self.ProductDescription" Multiplicity="1" />
-          <End Role="ProductModelProductDescription" Type="Self.ProductModelProductDescription" Multiplicity="*" />
+          <End Type="misspiggyDBModel.ProductDescription" Role="ProductDescription" Multiplicity="1" />
+          <End Type="misspiggyDBModel.ProductModelProductDescription" Role="ProductModelProductDescription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductDescription">
               <PropertyRef Name="ProductDescriptionID" />
@@ -1562,8 +1950,8 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductModelProductDescription_ProductModel_ProductModelID">
-          <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="1" />
-          <End Role="ProductModelProductDescription" Type="Self.ProductModelProductDescription" Multiplicity="*" />
+          <End Type="misspiggyDBModel.ProductModel" Role="ProductModel" Multiplicity="1" />
+          <End Type="misspiggyDBModel.ProductModelProductDescription" Role="ProductModelProductDescription" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductModel">
               <PropertyRef Name="ProductModelID" />
@@ -1574,10 +1962,10 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID">
-          <End Role="SalesOrderHeader" Type="Self.SalesOrderHeader" Multiplicity="1">
+          <End Type="misspiggyDBModel.SalesOrderHeader" Role="SalesOrderHeader" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="SalesOrderDetail" Type="Self.SalesOrderDetail" Multiplicity="*" />
+          <End Type="misspiggyDBModel.SalesOrderDetail" Role="SalesOrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SalesOrderHeader">
               <PropertyRef Name="SalesOrderID" />
@@ -1587,533 +1975,12 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="misspiggyDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BuildVersions" EntityType="Self.BuildVersion" />
-          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
-          <EntitySet Name="LU_tblContactType" EntityType="Self.LU_tblContactType" />
-          <EntitySet Name="LU_tblEventStatus" EntityType="Self.LU_tblEventStatus" />
-          <EntitySet Name="LU_tblEventType" EntityType="Self.LU_tblEventType" />
-          <EntitySet Name="tblContact_Org" EntityType="Self.tblContact_Org" />
-          <EntitySet Name="tblContact_Person" EntityType="Self.tblContact_Person" />
-          <EntitySet Name="tblDonation_Info" EntityType="Self.tblDonation_Info" />
-          <EntitySet Name="tblEvent_Info" EntityType="Self.tblEvent_Info" />
-          <EntitySet Name="tblEvent_Roster" EntityType="Self.tblEvent_Roster" />
-          <EntitySet Name="Addresses" EntityType="Self.Address" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="CustomerAddresses" EntityType="Self.CustomerAddress" />
-          <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
-          <EntitySet Name="ProductDescriptions" EntityType="Self.ProductDescription" />
-          <EntitySet Name="ProductModels" EntityType="Self.ProductModel" />
-          <EntitySet Name="ProductModelProductDescriptions" EntityType="Self.ProductModelProductDescription" />
-          <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetail" />
-          <EntitySet Name="SalesOrderHeaders" EntityType="Self.SalesOrderHeader" />
-          <EntitySet Name="LU_tblPgmRelationType" EntityType="Self.LU_tblPgmRelationType" />
-          <EntitySet Name="vGetAllCategories" EntityType="Self.vGetAllCategory" />
-          <EntitySet Name="vProductAndDescriptions" EntityType="Self.vProductAndDescription" />
-          <EntitySet Name="vProductModelCatalogDescriptions" EntityType="Self.vProductModelCatalogDescription" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-          <AssociationSet Name="FK__tblContac__Conta__267ABA7A" Association="Self.FK__tblContac__Conta__267ABA7A">
-            <End Role="LU_tblContactType" EntitySet="LU_tblContactType" />
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Statu__2E1BDC42" Association="Self.FK__tblEvent___Statu__2E1BDC42">
-            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Statu__49C3F6B7" Association="Self.FK__tblEvent___Statu__49C3F6B7">
-            <End Role="LU_tblEventStatus" EntitySet="LU_tblEventStatus" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Event__2D27B809" Association="Self.FK__tblEvent___Event__2D27B809">
-            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Event__47DBAE45" Association="Self.FK__tblEvent___Event__47DBAE45">
-            <End Role="LU_tblEventType" EntitySet="LU_tblEventType" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblContac__Org_I__56E8E7AB" Association="Self.FK__tblContac__Org_I__56E8E7AB">
-            <End Role="tblContact_Org" EntitySet="tblContact_Org" />
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Conta__3F466844" Association="Self.FK__tblEvent___Conta__3F466844">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Prima__2F10007B" Association="Self.FK__tblEvent___Prima__2F10007B">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Prima__48CFD27E" Association="Self.FK__tblEvent___Prima__48CFD27E">
-            <End Role="tblContact_Person" EntitySet="tblContact_Person" />
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__tblEvent___Event__3E52440B" Association="Self.FK__tblEvent___Event__3E52440B">
-            <End Role="tblEvent_Info" EntitySet="tblEvent_Info" />
-            <End Role="tblEvent_Roster" EntitySet="tblEvent_Roster" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerAddress_Address_AddressID" Association="Self.FK_CustomerAddress_Address_AddressID">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesOrderHeader_Address_BillTo_AddressID" Association="Self.FK_SalesOrderHeader_Address_BillTo_AddressID">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesOrderHeader_Address_ShipTo_AddressID" Association="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerAddress_Customer_CustomerID" Association="Self.FK_CustomerAddress_Customer_CustomerID">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesOrderHeader_Customer_CustomerID" Association="Self.FK_SalesOrderHeader_Customer_CustomerID">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductCategory_ProductCategoryID" Association="Self.FK_Product_ProductCategory_ProductCategoryID">
-            <End Role="ProductCategory" EntitySet="ProductCategories" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductModel_ProductModelID" Association="Self.FK_Product_ProductModel_ProductModelID">
-            <End Role="ProductModel" EntitySet="ProductModels" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesOrderDetail_Product_ProductID" Association="Self.FK_SalesOrderDetail_Product_ProductID">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" Association="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID">
-            <End Role="ProductCategory" EntitySet="ProductCategories" />
-            <End Role="ProductCategory1" EntitySet="ProductCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" Association="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID">
-            <End Role="ProductDescription" EntitySet="ProductDescriptions" />
-            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductModelProductDescription_ProductModel_ProductModelID" Association="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID">
-            <End Role="ProductModel" EntitySet="ProductModels" />
-            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" Association="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID">
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
-            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
-          </AssociationSet>
-          <FunctionImport Name="ufnGetAllCategories" IsComposable="true" ReturnType="Collection(misspiggyDBModel.ufnGetAllCategories_Result)" />
-          <FunctionImport Name="ufnGetCustomerInformation" IsComposable="true" ReturnType="Collection(misspiggyDBModel.ufnGetCustomerInformation_Result)">
-            <Parameter Name="CustomerID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="uspLogError">
-            <Parameter Name="ErrorLogID" Mode="InOut" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="uspPrintError" />
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="misspiggyDBModelStoreContainer" CdmEntityContainer="misspiggyDBEntities">
-          <EntitySetMapping Name="BuildVersions">
-            <EntityTypeMapping TypeName="misspiggyDBModel.BuildVersion">
-              <MappingFragment StoreEntitySet="BuildVersion">
-                <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
-                <ScalarProperty Name="Database_Version" ColumnName="Database Version" />
-                <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ErrorLogs">
-            <EntityTypeMapping TypeName="misspiggyDBModel.ErrorLog">
-              <MappingFragment StoreEntitySet="ErrorLog">
-                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
-                <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
-                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
-                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LU_tblContactType">
-            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblContactType">
-              <MappingFragment StoreEntitySet="LU_tblContactType">
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-                <ScalarProperty Name="Type_Desc" ColumnName="Type_Desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LU_tblEventStatus">
-            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblEventStatus">
-              <MappingFragment StoreEntitySet="LU_tblEventStatus">
-                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
-                <ScalarProperty Name="Status_Desc" ColumnName="Status_Desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LU_tblEventType">
-            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblEventType">
-              <MappingFragment StoreEntitySet="LU_tblEventType">
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
-                <ScalarProperty Name="Category_Desc" ColumnName="Category_Desc" />
-                <ScalarProperty Name="Sub_Category_ID" ColumnName="Sub_Category_ID" />
-                <ScalarProperty Name="Sub_Category_Desc" ColumnName="Sub_Category_Desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblContact_Org">
-            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_Org">
-              <MappingFragment StoreEntitySet="tblContact_Org">
-                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
-                <ScalarProperty Name="Org_Name" ColumnName="Org_Name" />
-                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
-                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
-                <ScalarProperty Name="Phone_Type" ColumnName="Phone_Type" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblContact_Person">
-            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_Person">
-              <MappingFragment StoreEntitySet="tblContact_Person">
-                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
-                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
-                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
-                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
-                <ScalarProperty Name="Name_Prefix" ColumnName="Name_Prefix" />
-                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Phone_Work" ColumnName="Phone_Work" />
-                <ScalarProperty Name="Phone_Cell" ColumnName="Phone_Cell" />
-                <ScalarProperty Name="Related_Contact_1" ColumnName="Related_Contact_1" />
-                <ScalarProperty Name="Related_Contact_2" ColumnName="Related_Contact_2" />
-                <ScalarProperty Name="Intro_Contact" ColumnName="Intro_Contact" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Related_Program" ColumnName="Related_Program" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblDonation_Info">
-            <EntityTypeMapping TypeName="misspiggyDBModel.tblDonation_Info">
-              <MappingFragment StoreEntitySet="tblDonation_Info">
-                <ScalarProperty Name="Donation_Id" ColumnName="Donation_Id" />
-                <ScalarProperty Name="Donor_First_Name" ColumnName="Donor_First_Name" />
-                <ScalarProperty Name="Donor_Last_Name" ColumnName="Donor_Last_Name" />
-                <ScalarProperty Name="Donor_Contact_Type" ColumnName="Donor_Contact_Type" />
-                <ScalarProperty Name="Is_Donor_Org_Ind" ColumnName="Is_Donor_Org_Ind" />
-                <ScalarProperty Name="Is_Org_Gift" ColumnName="Is_Org_Gift" />
-                <ScalarProperty Name="Donor_Type" ColumnName="Donor_Type" />
-                <ScalarProperty Name="Donor_Email_Id" ColumnName="Donor_Email_Id" />
-                <ScalarProperty Name="Donor_Employer" ColumnName="Donor_Employer" />
-                <ScalarProperty Name="Campaign_Name" ColumnName="Campaign_Name" />
-                <ScalarProperty Name="Tran_Amt" ColumnName="Tran_Amt" />
-                <ScalarProperty Name="Tran_Date" ColumnName="Tran_Date" />
-                <ScalarProperty Name="Tran_Check_Num" ColumnName="Tran_Check_Num" />
-                <ScalarProperty Name="Tran_Card_Last4" ColumnName="Tran_Card_Last4" />
-                <ScalarProperty Name="Addr_Street1" ColumnName="Addr_Street1" />
-                <ScalarProperty Name="Addr_Street2" ColumnName="Addr_Street2" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
-                <ScalarProperty Name="Load_Datetime" ColumnName="Load_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblEvent_Info">
-            <EntityTypeMapping TypeName="misspiggyDBModel.tblEvent_Info">
-              <MappingFragment StoreEntitySet="tblEvent_Info">
-                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
-                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Planned_Start" ColumnName="Planned_Start" />
-                <ScalarProperty Name="Planned_End" ColumnName="Planned_End" />
-                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
-                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
-                <ScalarProperty Name="GPS_Location" ColumnName="GPS_Location" />
-                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
-                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
-                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
-                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
-                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
-                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
-                <ScalarProperty Name="Adult_Cnt" ColumnName="Adult_Cnt" />
-                <ScalarProperty Name="Child_Cnt" ColumnName="Child_Cnt" />
-                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
-                <ScalarProperty Name="Average_Score" ColumnName="Average_Score" />
-                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Photo_Release_Ind" ColumnName="Photo_Release_Ind" />
-                <ScalarProperty Name="Photo_Code" ColumnName="Photo_Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblEvent_Roster">
-            <EntityTypeMapping TypeName="misspiggyDBModel.tblEvent_Roster">
-              <MappingFragment StoreEntitySet="tblEvent_Roster">
-                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
-                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
-                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
-                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
-                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
-                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="misspiggyDBModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
-                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
-                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="StateProvince" ColumnName="StateProvince" />
-                <ScalarProperty Name="CountryRegion" ColumnName="CountryRegion" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="misspiggyDBModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="NameStyle" ColumnName="NameStyle" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="SalesPerson" ColumnName="SalesPerson" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CustomerAddresses">
-            <EntityTypeMapping TypeName="misspiggyDBModel.CustomerAddress">
-              <MappingFragment StoreEntitySet="CustomerAddress">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
-                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="misspiggyDBModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="StandardCost" ColumnName="StandardCost" />
-                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
-                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
-                <ScalarProperty Name="SellStartDate" ColumnName="SellStartDate" />
-                <ScalarProperty Name="SellEndDate" ColumnName="SellEndDate" />
-                <ScalarProperty Name="DiscontinuedDate" ColumnName="DiscontinuedDate" />
-                <ScalarProperty Name="ThumbNailPhoto" ColumnName="ThumbNailPhoto" />
-                <ScalarProperty Name="ThumbnailPhotoFileName" ColumnName="ThumbnailPhotoFileName" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategories">
-            <EntityTypeMapping TypeName="misspiggyDBModel.ProductCategory">
-              <MappingFragment StoreEntitySet="ProductCategory">
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
-                <ScalarProperty Name="ParentProductCategoryID" ColumnName="ParentProductCategoryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductDescriptions">
-            <EntityTypeMapping TypeName="misspiggyDBModel.ProductDescription">
-              <MappingFragment StoreEntitySet="ProductDescription">
-                <ScalarProperty Name="ProductDescriptionID" ColumnName="ProductDescriptionID" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductModels">
-            <EntityTypeMapping TypeName="misspiggyDBModel.ProductModel">
-              <MappingFragment StoreEntitySet="ProductModel">
-                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CatalogDescription" ColumnName="CatalogDescription" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductModelProductDescriptions">
-            <EntityTypeMapping TypeName="misspiggyDBModel.ProductModelProductDescription">
-              <MappingFragment StoreEntitySet="ProductModelProductDescription">
-                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
-                <ScalarProperty Name="ProductDescriptionID" ColumnName="ProductDescriptionID" />
-                <ScalarProperty Name="Culture" ColumnName="Culture" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalesOrderDetails">
-            <EntityTypeMapping TypeName="misspiggyDBModel.SalesOrderDetail">
-              <MappingFragment StoreEntitySet="SalesOrderDetail">
-                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
-                <ScalarProperty Name="SalesOrderDetailID" ColumnName="SalesOrderDetailID" />
-                <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
-                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SalesOrderHeaders">
-            <EntityTypeMapping TypeName="misspiggyDBModel.SalesOrderHeader">
-              <MappingFragment StoreEntitySet="SalesOrderHeader">
-                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
-                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="OnlineOrderFlag" ColumnName="OnlineOrderFlag" />
-                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
-                <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
-                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="ShipToAddressID" ColumnName="ShipToAddressID" />
-                <ScalarProperty Name="BillToAddressID" ColumnName="BillToAddressID" />
-                <ScalarProperty Name="ShipMethod" ColumnName="ShipMethod" />
-                <ScalarProperty Name="CreditCardApprovalCode" ColumnName="CreditCardApprovalCode" />
-                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
-                <ScalarProperty Name="Freight" ColumnName="Freight" />
-                <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LU_tblPgmRelationType">
-            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblPgmRelationType">
-              <MappingFragment StoreEntitySet="LU_tblPgmRelationType">
-                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-                <ScalarProperty Name="Type_Desc" ColumnName="Type_Desc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vGetAllCategories">
-            <EntityTypeMapping TypeName="misspiggyDBModel.vGetAllCategory">
-              <MappingFragment StoreEntitySet="vGetAllCategories">
-                <ScalarProperty Name="ParentProductCategoryName" ColumnName="ParentProductCategoryName" />
-                <ScalarProperty Name="ProductCategoryName" ColumnName="ProductCategoryName" />
-                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vProductAndDescriptions">
-            <EntityTypeMapping TypeName="misspiggyDBModel.vProductAndDescription">
-              <MappingFragment StoreEntitySet="vProductAndDescription">
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
-                <ScalarProperty Name="Culture" ColumnName="Culture" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vProductModelCatalogDescriptions">
-            <EntityTypeMapping TypeName="misspiggyDBModel.vProductModelCatalogDescription">
-              <MappingFragment StoreEntitySet="vProductModelCatalogDescription">
-                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
-                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
-                <ScalarProperty Name="ProductURL" ColumnName="ProductURL" />
-                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
-                <ScalarProperty Name="WarrantyDescription" ColumnName="WarrantyDescription" />
-                <ScalarProperty Name="NoOfYears" ColumnName="NoOfYears" />
-                <ScalarProperty Name="MaintenanceDescription" ColumnName="MaintenanceDescription" />
-                <ScalarProperty Name="Wheel" ColumnName="Wheel" />
-                <ScalarProperty Name="Saddle" ColumnName="Saddle" />
-                <ScalarProperty Name="Pedal" ColumnName="Pedal" />
-                <ScalarProperty Name="BikeFrame" ColumnName="BikeFrame" />
-                <ScalarProperty Name="Crankset" ColumnName="Crankset" />
-                <ScalarProperty Name="PictureAngle" ColumnName="PictureAngle" />
-                <ScalarProperty Name="PictureSize" ColumnName="PictureSize" />
-                <ScalarProperty Name="ProductPhotoID" ColumnName="ProductPhotoID" />
-                <ScalarProperty Name="Material" ColumnName="Material" />
-                <ScalarProperty Name="Color" ColumnName="Color" />
-                <ScalarProperty Name="ProductLine" ColumnName="ProductLine" />
-                <ScalarProperty Name="Style" ColumnName="Style" />
-                <ScalarProperty Name="RiderExperience" ColumnName="RiderExperience" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="misspiggyDBModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionName="misspiggyDBModel.Store.ufnGetAllCategories" FunctionImportName="ufnGetAllCategories">
             <ResultMapping>
               <ComplexTypeMapping TypeName="misspiggyDBModel.ufnGetAllCategories_Result">
@@ -2134,7 +2001,434 @@ warning 6002: The table/view 'misspiggyDB.sys.database_firewall_rules' does not 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="uspLogError" FunctionName="misspiggyDBModel.Store.uspLogError" />
           <FunctionImportMapping FunctionImportName="uspPrintError" FunctionName="misspiggyDBModel.Store.uspPrintError" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="BuildVersions">
+            <EntityTypeMapping TypeName="misspiggyDBModel.BuildVersion">
+              <MappingFragment StoreEntitySet="BuildVersion">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+                <ScalarProperty Name="Database_Version" ColumnName="Database Version" />
+                <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="misspiggyDBModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
+                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblContactType">
+            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblContactType">
+              <MappingFragment StoreEntitySet="LU_tblContactType">
+                <ScalarProperty Name="Type_Desc" ColumnName="Type_Desc" />
+                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEvent_Role">
+            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblEvent_Role">
+              <MappingFragment StoreEntitySet="LU_tblEvent_Role">
+                <ScalarProperty Name="Role_Desc" ColumnName="Role_Desc" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEventStatus">
+            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblEventStatus">
+              <MappingFragment StoreEntitySet="LU_tblEventStatus">
+                <ScalarProperty Name="Status_Desc" ColumnName="Status_Desc" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblEventType">
+            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblEventType">
+              <MappingFragment StoreEntitySet="LU_tblEventType">
+                <ScalarProperty Name="Type_Desc" ColumnName="Type_Desc" />
+                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LU_tblPgmRelationType">
+            <EntityTypeMapping TypeName="misspiggyDBModel.LU_tblPgmRelationType">
+              <MappingFragment StoreEntitySet="LU_tblPgmRelationType">
+                <ScalarProperty Name="Type_Desc" ColumnName="Type_Desc" />
+                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Org">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_Org">
+              <MappingFragment StoreEntitySet="tblContact_Org">
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Phone_Type" ColumnName="Phone_Type" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Org_Name" ColumnName="Org_Name" />
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Person">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_Person">
+              <MappingFragment StoreEntitySet="tblContact_Person">
+                <ScalarProperty Name="Addr_Country" ColumnName="Addr_Country" />
+                <ScalarProperty Name="SalesForce_Contact_Id" ColumnName="SalesForce_Contact_Id" />
+                <ScalarProperty Name="Kindful_Contact_Id" ColumnName="Kindful_Contact_Id" />
+                <ScalarProperty Name="Org_Id" ColumnName="Org_Id" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Related_Program" ColumnName="Related_Program" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Intro_Contact" ColumnName="Intro_Contact" />
+                <ScalarProperty Name="Related_Contact_2" ColumnName="Related_Contact_2" />
+                <ScalarProperty Name="Related_Contact_1" ColumnName="Related_Contact_1" />
+                <ScalarProperty Name="Phone_Cell" ColumnName="Phone_Cell" />
+                <ScalarProperty Name="Phone_Work" ColumnName="Phone_Work" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Email_Id" ColumnName="Email_Id" />
+                <ScalarProperty Name="Name_Prefix" ColumnName="Name_Prefix" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_Person_Types">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_Person_Types">
+              <MappingFragment StoreEntitySet="tblContact_Person_Types">
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Contact_Type_Id" ColumnName="Contact_Type_Id" />
+                <ScalarProperty Name="Person_Contact_Id" ColumnName="Person_Contact_Id" />
+                <ScalarProperty Name="Person_Type_Id" ColumnName="Person_Type_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContact_PgmRelation_Types">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblContact_PgmRelation_Types">
+              <MappingFragment StoreEntitySet="tblContact_PgmRelation_Types">
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="PgmRelation_Type_Id" ColumnName="PgmRelation_Type_Id" />
+                <ScalarProperty Name="PgmRelation_Contact_Id" ColumnName="PgmRelation_Contact_Id" />
+                <ScalarProperty Name="PgmRelation_Id" ColumnName="PgmRelation_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDonation_Info">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblDonation_Info">
+              <MappingFragment StoreEntitySet="tblDonation_Info">
+                <ScalarProperty Name="Donor_Contact_Id" ColumnName="Donor_Contact_Id" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Load_Datetime" ColumnName="Load_Datetime" />
+                <ScalarProperty Name="Tran_Card_Last4" ColumnName="Tran_Card_Last4" />
+                <ScalarProperty Name="Tran_Check_Num" ColumnName="Tran_Check_Num" />
+                <ScalarProperty Name="Tran_Date" ColumnName="Tran_Date" />
+                <ScalarProperty Name="Tran_Amt" ColumnName="Tran_Amt" />
+                <ScalarProperty Name="Campaign_Name" ColumnName="Campaign_Name" />
+                <ScalarProperty Name="Donor_Employer" ColumnName="Donor_Employer" />
+                <ScalarProperty Name="Donor_Email_Id" ColumnName="Donor_Email_Id" />
+                <ScalarProperty Name="Donor_Type" ColumnName="Donor_Type" />
+                <ScalarProperty Name="Is_Org_Gift" ColumnName="Is_Org_Gift" />
+                <ScalarProperty Name="Is_Donor_Org_Ind" ColumnName="Is_Donor_Org_Ind" />
+                <ScalarProperty Name="Donor_Contact_Type" ColumnName="Donor_Contact_Type" />
+                <ScalarProperty Name="Donor_Last_Name" ColumnName="Donor_Last_Name" />
+                <ScalarProperty Name="Donor_First_Name" ColumnName="Donor_First_Name" />
+                <ScalarProperty Name="Donation_Id" ColumnName="Donation_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEvent_Info">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblEvent_Info">
+              <MappingFragment StoreEntitySet="tblEvent_Info">
+                <ScalarProperty Name="Involved_Org_Cnt" ColumnName="Involved_Org_Cnt" />
+                <ScalarProperty Name="Photo_Code" ColumnName="Photo_Code" />
+                <ScalarProperty Name="Photo_Release_Ind" ColumnName="Photo_Release_Ind" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Revenue" ColumnName="Revenue" />
+                <ScalarProperty Name="Average_Score" ColumnName="Average_Score" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Child_Cnt" ColumnName="Child_Cnt" />
+                <ScalarProperty Name="Adult_Cnt" ColumnName="Adult_Cnt" />
+                <ScalarProperty Name="Active_Ind" ColumnName="Active_Ind" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Addr_ZipCode" ColumnName="Addr_ZipCode" />
+                <ScalarProperty Name="Addr_State" ColumnName="Addr_State" />
+                <ScalarProperty Name="Addr_City" ColumnName="Addr_City" />
+                <ScalarProperty Name="Addr_Street" ColumnName="Addr_Street" />
+                <ScalarProperty Name="Primary_Contact" ColumnName="Primary_Contact" />
+                <ScalarProperty Name="GPS_Location" ColumnName="GPS_Location" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Event_Duration" ColumnName="Event_Duration" />
+                <ScalarProperty Name="Planned_End" ColumnName="Planned_End" />
+                <ScalarProperty Name="Planned_Start" ColumnName="Planned_Start" />
+                <ScalarProperty Name="Event_Date" ColumnName="Event_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Event_Type_Id" ColumnName="Event_Type_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEvent_Roster">
+            <EntityTypeMapping TypeName="misspiggyDBModel.tblEvent_Roster">
+              <MappingFragment StoreEntitySet="tblEvent_Roster">
+                <ScalarProperty Name="Contact_Event_Role" ColumnName="Contact_Event_Role" />
+                <ScalarProperty Name="Modified_Datetime" ColumnName="Modified_Datetime" />
+                <ScalarProperty Name="Create_Datetime" ColumnName="Create_Datetime" />
+                <ScalarProperty Name="Contact_Hours" ColumnName="Contact_Hours" />
+                <ScalarProperty Name="Contact_Id" ColumnName="Contact_Id" />
+                <ScalarProperty Name="Event_Id" ColumnName="Event_Id" />
+                <ScalarProperty Name="Event_Roster_Id" ColumnName="Event_Roster_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="misspiggyDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="CountryRegion" ColumnName="CountryRegion" />
+                <ScalarProperty Name="StateProvince" ColumnName="StateProvince" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="misspiggyDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="SalesPerson" ColumnName="SalesPerson" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NameStyle" ColumnName="NameStyle" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerAddresses">
+            <EntityTypeMapping TypeName="misspiggyDBModel.CustomerAddress">
+              <MappingFragment StoreEntitySet="CustomerAddress">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="misspiggyDBModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="ThumbnailPhotoFileName" ColumnName="ThumbnailPhotoFileName" />
+                <ScalarProperty Name="ThumbNailPhoto" ColumnName="ThumbNailPhoto" />
+                <ScalarProperty Name="DiscontinuedDate" ColumnName="DiscontinuedDate" />
+                <ScalarProperty Name="SellEndDate" ColumnName="SellEndDate" />
+                <ScalarProperty Name="SellStartDate" ColumnName="SellStartDate" />
+                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+                <ScalarProperty Name="StandardCost" ColumnName="StandardCost" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="misspiggyDBModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentProductCategoryID" ColumnName="ParentProductCategoryID" />
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDescriptions">
+            <EntityTypeMapping TypeName="misspiggyDBModel.ProductDescription">
+              <MappingFragment StoreEntitySet="ProductDescription">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductDescriptionID" ColumnName="ProductDescriptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductModels">
+            <EntityTypeMapping TypeName="misspiggyDBModel.ProductModel">
+              <MappingFragment StoreEntitySet="ProductModel">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="CatalogDescription" ColumnName="CatalogDescription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductModelProductDescriptions">
+            <EntityTypeMapping TypeName="misspiggyDBModel.ProductModelProductDescription">
+              <MappingFragment StoreEntitySet="ProductModelProductDescription">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="ProductDescriptionID" ColumnName="ProductDescriptionID" />
+                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrderDetails">
+            <EntityTypeMapping TypeName="misspiggyDBModel.SalesOrderDetail">
+              <MappingFragment StoreEntitySet="SalesOrderDetail">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+                <ScalarProperty Name="UnitPriceDiscount" ColumnName="UnitPriceDiscount" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderQty" ColumnName="OrderQty" />
+                <ScalarProperty Name="SalesOrderDetailID" ColumnName="SalesOrderDetailID" />
+                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrderHeaders">
+            <EntityTypeMapping TypeName="misspiggyDBModel.SalesOrderHeader">
+              <MappingFragment StoreEntitySet="SalesOrderHeader">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
+                <ScalarProperty Name="Freight" ColumnName="Freight" />
+                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="CreditCardApprovalCode" ColumnName="CreditCardApprovalCode" />
+                <ScalarProperty Name="ShipMethod" ColumnName="ShipMethod" />
+                <ScalarProperty Name="BillToAddressID" ColumnName="BillToAddressID" />
+                <ScalarProperty Name="ShipToAddressID" ColumnName="ShipToAddressID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+                <ScalarProperty Name="OnlineOrderFlag" ColumnName="OnlineOrderFlag" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vGetAllCategories">
+            <EntityTypeMapping TypeName="misspiggyDBModel.vGetAllCategory">
+              <MappingFragment StoreEntitySet="vGetAllCategories">
+                <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+                <ScalarProperty Name="ProductCategoryName" ColumnName="ProductCategoryName" />
+                <ScalarProperty Name="ParentProductCategoryName" ColumnName="ParentProductCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vProductAndDescriptions">
+            <EntityTypeMapping TypeName="misspiggyDBModel.vProductAndDescription">
+              <MappingFragment StoreEntitySet="vProductAndDescription">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vProductModelCatalogDescriptions">
+            <EntityTypeMapping TypeName="misspiggyDBModel.vProductModelCatalogDescription">
+              <MappingFragment StoreEntitySet="vProductModelCatalogDescription">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="RiderExperience" ColumnName="RiderExperience" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="ProductLine" ColumnName="ProductLine" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="ProductPhotoID" ColumnName="ProductPhotoID" />
+                <ScalarProperty Name="PictureSize" ColumnName="PictureSize" />
+                <ScalarProperty Name="PictureAngle" ColumnName="PictureAngle" />
+                <ScalarProperty Name="Crankset" ColumnName="Crankset" />
+                <ScalarProperty Name="BikeFrame" ColumnName="BikeFrame" />
+                <ScalarProperty Name="Pedal" ColumnName="Pedal" />
+                <ScalarProperty Name="Saddle" ColumnName="Saddle" />
+                <ScalarProperty Name="Wheel" ColumnName="Wheel" />
+                <ScalarProperty Name="MaintenanceDescription" ColumnName="MaintenanceDescription" />
+                <ScalarProperty Name="NoOfYears" ColumnName="NoOfYears" />
+                <ScalarProperty Name="WarrantyDescription" ColumnName="WarrantyDescription" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="ProductURL" ColumnName="ProductURL" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="misspiggyDBModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

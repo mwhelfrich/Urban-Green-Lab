@@ -33,8 +33,12 @@ namespace UrbanLab
         public Nullable<System.DateTime> Create_Datetime { get; set; }
         public Nullable<System.DateTime> Modified_Datetime { get; set; }
         public string Active_Ind { get; set; }
+        public string Kindful_Contact_Id { get; set; }
+        public string SalesForce_Contact_Id { get; set; }
+        public string Addr_Country { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblContact_Person> tblContact_Person { get; set; }
+        public virtual tblContact_Person tblContact_Person1 { get; set; }
     }
 }

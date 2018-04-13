@@ -30,10 +30,14 @@ namespace UrbanLab
         public virtual DbSet<BuildVersion> BuildVersions { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<LU_tblContactType> LU_tblContactType { get; set; }
+        public virtual DbSet<LU_tblEvent_Role> LU_tblEvent_Role { get; set; }
         public virtual DbSet<LU_tblEventStatus> LU_tblEventStatus { get; set; }
         public virtual DbSet<LU_tblEventType> LU_tblEventType { get; set; }
+        public virtual DbSet<LU_tblPgmRelationType> LU_tblPgmRelationType { get; set; }
         public virtual DbSet<tblContact_Org> tblContact_Org { get; set; }
         public virtual DbSet<tblContact_Person> tblContact_Person { get; set; }
+        public virtual DbSet<tblContact_Person_Types> tblContact_Person_Types { get; set; }
+        public virtual DbSet<tblContact_PgmRelation_Types> tblContact_PgmRelation_Types { get; set; }
         public virtual DbSet<tblDonation_Info> tblDonation_Info { get; set; }
         public virtual DbSet<tblEvent_Info> tblEvent_Info { get; set; }
         public virtual DbSet<tblEvent_Roster> tblEvent_Roster { get; set; }
@@ -47,7 +51,6 @@ namespace UrbanLab
         public virtual DbSet<ProductModelProductDescription> ProductModelProductDescriptions { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
         public virtual DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
-        public virtual DbSet<LU_tblPgmRelationType> LU_tblPgmRelationType { get; set; }
         public virtual DbSet<vGetAllCategory> vGetAllCategories { get; set; }
         public virtual DbSet<vProductAndDescription> vProductAndDescriptions { get; set; }
         public virtual DbSet<vProductModelCatalogDescription> vProductModelCatalogDescriptions { get; set; }

@@ -28,13 +28,8 @@ namespace UrbanLab
         public Nullable<System.DateTime> Tran_Date { get; set; }
         public string Tran_Check_Num { get; set; }
         public string Tran_Card_Last4 { get; set; }
-        public string Addr_Street1 { get; set; }
-        public string Addr_Street2 { get; set; }
-        public string Addr_City { get; set; }
-        public string Addr_State { get; set; }
-        public string Addr_ZipCode { get; set; }
-        public string Addr_Country { get; set; }
         public Nullable<System.DateTime> Load_Datetime { get; set; }
         public Nullable<System.DateTime> Modified_Datetime { get; set; }
+        public Nullable<long> Donor_Contact_Id { get; set; }
     }
 }

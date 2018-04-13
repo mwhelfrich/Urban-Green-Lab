@@ -17,13 +17,13 @@ namespace UrbanLab
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LU_tblContactType()
         {
-            this.tblContact_Person = new HashSet<tblContact_Person>();
+            this.tblContact_Person_Types = new HashSet<tblContact_Person_Types>();
         }
     
         public int Type_Id { get; set; }
         public string Type_Desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblContact_Person> tblContact_Person { get; set; }
+        public virtual ICollection<tblContact_Person_Types> tblContact_Person_Types { get; set; }
     }
 }

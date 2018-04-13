@@ -12,21 +12,18 @@ namespace UrbanLab
     using System;
     using System.Collections.Generic;
     
-    public partial class LU_tblEventType
+    public partial class LU_tblEvent_Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LU_tblEventType()
+        public LU_tblEvent_Role()
         {
-            this.tblEvent_Info = new HashSet<tblEvent_Info>();
-            this.tblEvent_Info1 = new HashSet<tblEvent_Info>();
+            this.tblEvent_Roster = new HashSet<tblEvent_Roster>();
         }
     
-        public int Type_Id { get; set; }
-        public string Type_Desc { get; set; }
+        public int Role_Id { get; set; }
+        public string Role_Desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblEvent_Info> tblEvent_Info { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblEvent_Info> tblEvent_Info1 { get; set; }
+        public virtual ICollection<tblEvent_Roster> tblEvent_Roster { get; set; }
     }
 }
